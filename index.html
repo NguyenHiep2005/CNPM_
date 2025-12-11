@@ -8,80 +8,141 @@
         <link rel="stylesheet" href="./assets/font/themify-icons-font/themify-icons/themify-icons.css">
     </head>
     <body>
+        <style>
+            .checkout-btn, 
+            .clear-cart-btn {
+                width: 100%;
+                padding: 14px 20px;
+                border: none;
+                border-radius: 8px;
+                font-weight: 700;
+                font-size: 15px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-family: inherit;
+            }
+
+            /* Nút THANH TOÁN - Đen chủ đạo */
+            .checkout-btn {
+                background: linear-gradient(135deg, #000 0%, #333 100%);
+                color: white;
+                margin-bottom: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* Hiệu ứng sáng khi hover */
+            .checkout-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            
+            }
+
+            .checkout-btn:hover::before {
+                left: 100%;
+            }
+
+            
+
+            .checkout-btn:active {
+                transform: translateY(0);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            /* Nút XÓA GIỎ HÀNG  */
+            .clear-cart-btn {
+                background: white;
+                color: black;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+                border: 1px solid #000;
+            }
+
+            
+
+            
+
+            /* Hiệu ứng khi loading (optional) */
+            .checkout-btn.loading,
+            .clear-cart-btn.loading {
+                pointer-events: none;
+                opacity: 0.7;
+            }
+
+            .checkout-btn.loading::after,
+            .clear-cart-btn.loading::after {
+                content: '';
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 16px;
+                height: 16px;
+                border: 2px solid rgba(255,255,255,0.3);
+                border-top-color: white;
+                border-radius: 50%;
+            
+            }
+
+            @keyframes spin {
+                to { transform: translateY(-50%) rotate(360deg); }
+            }
+
+            /* Responsive - Mobile */
+            @media (max-width: 480px) {
+                .checkout-btn, 
+                .clear-cart-btn {
+                    padding: 12px 16px;
+                    font-size: 14px;
+                }
+            }            
+        </style>
         <div id="header">
             <div class="container-header">
                 <div class="sub-img">
                     <img src="./assets/img/img2.png" alt="Logo" id="logo">
                 </div>
                 <ul class="nav-list">
-                    <li><a href="">NIKE
-                        <div class="space-top">
-                            <ul class="sub-nav">
-                                
-                                <li><a href="">AIR FORCE 1</a></li>
-                                <li><a href="">JORDAN ADIDAS</a></li>
-                                <li><a href="">M2K</a></li>
-                                
-                            </ul>
-
-                        </div>
+                    <li><a href="product_nike.html">NIKE
+                        
                         </a>
                     </li>
                     <li><a href="">ADIDAS
-                        <div class="space-top">
-
-                            <ul class="sub-nav">
-                                <li><a href="">SUPER STYLE</a></li>
-                                <li><a href="">ALPHA BOUNCE</a></li>
-        
-                                
-        
-                            </ul>
-                        </div>
                         </a>
                     </li>
                     <li><a href="">PUMA
-                        <div class="space-top">
-
-                            <ul class="sub-nav">
                         
-                                <li><a href="">ForeverRun</a></li>
-                                <li><a href="">Deviate NITRO</a></li>
-                            </ul>
-                        </div>
                         </a>
                     </li>
                     <li><a href="">HÃNG KHÁC
-                        <div class="space-top">
-
-                            <ul class="sub-nav">
                         
-                                <li><a href="">MLB</a></li>
-                                <li><a href="">CONVERSE</a></li>
-                                <li><a href="">NEW BALANCE</a></li>
-                            </ul>
-                        </div>
                         </a>
                     </li>
                     <li><a href="">⚡FLASH SALE
-                        <div class="space-top">
-
-                            <ul class="sub-nav">
                         
-                                <li><a href="">FORUM</a></li>
-                                <li><a href="">SUPER STYLE</a></li>
-                                <li><a href="">ALPHA BOUNCE</a></li>
-        
-                                
-        
-                            </ul>
-                        </div>
                         </a>
                     </li>
                 </ul>
                 <div class="search-icon">
-                    <i class="ti-search"></i>
-                    <i class="ti-shopping-cart"></i>
+                    <button id="searchToggle" class="icon-btn" aria-label="Tìm kiếm"><i class="ti-search"></i></button>
+
+                    <div id="searchBox" class="search-box" style="display:none;">
+                        <input id="searchInput" type="search" placeholder="Tìm sản phẩm, thương hiệu..." autocomplete="off">
+                        <div id="searchResults" class="search-results" role="listbox"></div>
+                    </div>
+
+                    <button id="cartBtn" class="icon-btn" aria-label="Giỏ hàng">
+                        <i class="ti-shopping-cart"></i>
+                        <span id="cartBadge" class="cart-badge" style="display:none;">0</span>
+                    </button>
+                    <div id="userIcon" style="position: relative;"></div>
                 </div>
 
             </div>           
@@ -95,24 +156,18 @@
         <div id="content">
             <div class="container-content">
                 <div class="content-1 center-content">
-                    <div class="gener">
-                        <h2  class = sub-name> GIÀY CHẠY BỘ</h2>
-                        <div class="block-button">
-                            <a href="" class="button-sub-name">XEM MẪU</a>
-                        </div>
-                    </div>
-                    <div class="gener">
-                        <h2 class = sub-name>GIÀY CÔNG SỞ</h2>
-                        <div class="block-button">
-                            <a href="" class="button-sub-name">XEM MẪU</a>
-                        </div>
-                    </div>
-                    <div class="gener">
-                        <h2 class = sub-name>ĐỒ VỆ SINH</h2>
-                        <div class="block-button">
-                            <a href="" class="button-sub-name">XEM MẪU</a>
-                        </div>
-                    </div>
+                    <a class="gener" href="https://www.maisononline.vn/blogs/news/cach-chon-giay-the-thao-phu-hop?srsltid=AfmBOoo8V_JTK5eCUFb6aXrtHDvij2A_HcPYjfOuK7hGfrLctqCWMKiU" target="_blank" rel="noopener noreferrer">
+                        <h2 class="sub-name">CÁCH CHỌN GIÀY</h2>
+                        
+                    </a>
+                    <a class="gener" href="https://xtep.vn/blogs/new/tips-ve-sinh-va-bao-quan-giay-dung-cach?srsltid=AfmBOooMKHoQ7AzSnf0XNjMjsTVCqFS-USdnhkJ-6zpREdqts3VrDhyF" target="_blank" rel="noopener noreferrer">
+                        <h2 class="sub-name">BẢO QUẢN GIÀY</h2>
+                        
+                    </a>
+                    <a class="gener" href="https://ximo.vn/chai-ve-sinh-giay?utm_source=ads-lock-screen&random=3453963683630389723&network=g&lpurl=https%3A%2F%2Fximo.vn%2Fchai-ve-sinh-giay&device=c&devicemodel=&keyword=v%E1%BB%87%20sinh%20gi%C3%A0y&matchtype=p&creative=745524117077&placement=&campaignid=22431810626&adgroupid=181712794470&loc_physical_ms=9198159&adposition=&aceid=&gad_source=1&gad_campaignid=22431810626&gbraid=0AAAAADhq-Eps6ThRLGR8Lx9pEn9jcwu6G&gclid=Cj0KCQiA9OnJBhD-ARIsAPV51xOrcmNoUNQ9_SZhZ5_jQIjRhN1yVu4lDRxq06AOMbMdO17gxD6Bye8aAiK5EALw_wcB" target="_blank" rel="noopener noreferrer">
+                        <h2 class="sub-name">ĐỒ VỆ SINH</h2>
+                        
+                    </a>
                 </div>
 
             <!-- Hang cao cap -->
@@ -126,25 +181,25 @@
                 </div>
     
                 <div class="content-3 grid-template space-margin">
-                    <div class="product-card">
+                    <a class="product-card" href="products.html?id=prod1">
                         <span class="discount-badge">35%</span>
-                       
-                        <img class="product-img" src="./assets/img/mau1.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
+                        <img class="product-img" src="./assets/img/mau1.jpg" alt="Nike Air Force 1">
+                        <div class="product-name">NIKE AIR FORCE 1 '07 ESSENTIAL</div>
                         <div>
                             <span class="price-old">850.000₫</span>
                             <span class="price-new">550.000₫</span>
                         </div>
-                    </div>
-                     <div class="product-card">
+                    </a>
+
+                    <a class="product-card" href="products.html?id=prod2">
                         <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau2.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
+                        <img class="product-img" src="./assets/img/mau2.jpg" alt="New Balance">
+                        <div class="product-name">NEW BALANCE / MẪU 2</div>
                         <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
+                            <span class="price-old">800.000₫</span>
+                            <span class="price-new">520.000₫</span>
                         </div>
-                    </div>
+                    </a>
                     
                     <div class="product-card">
                         <span class="discount-badge">35%</span>
@@ -201,8 +256,8 @@
                         <img class="product-img" src="./assets/img/mau4.jpg" alt="Tên sản phẩm">
                         <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
                         <div>
-                                                    <span class="price-old">850.000₫</span>
-                                                    <span class="price-new">550.000₫</span>
+                            <span class="price-old">850.000₫</span>
+                            <span class="price-new">550.000₫</span>
                         </div>
                     </div>
 
@@ -303,7 +358,7 @@
                     <section class="container-content">
                         <div class="text">
                             <div class="text-1">
-                                <p class = "sub-texr-1">Hơn 5 năm phát triển, Style Star luôn mang đến những mẫu giày chất lượng tốt nhất với giá cả hợp lí nhất đến tay người tiêu dùng với hệ thống cửa hàng hàng đầu TP.HCM và bán online khắp Việt Nam</p>
+                                <p class = "sub-texr-1">Hơn 5 năm phát triển, Cloudy Sport luôn mang đến những mẫu giày chất lượng tốt nhất với giá cả hợp lí nhất đến tay người tiêu dùng với hệ thống cửa hàng hàng đầu TP.HCM và bán online khắp Việt Nam</p>
                             </div>
         
                             <div class="text-2">
@@ -435,7 +490,9 @@
         </div>
 
         </div>
-        <script src="./assets/css/script.js"></script>
-        
+        <script src="./assets/js/auth.js"></script>
+        <script src="./assets/js/search-cart.js"></script>
+        <script src="./assets/js/test.js"></script>
+        <script src="./assets/js/user-profile.js"></script>
     </body>
-</html>
+</html> 

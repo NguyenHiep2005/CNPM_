@@ -1,288 +1,486 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Nike Air Max 270</title>
-    <link rel="stylesheet" href="./assets/css/styles2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike - CloudySport</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/font/themify-icons-font/themify-icons/themify-icons.css">
+    <style>
+        .checkout-btn, 
+        .clear-cart-btn {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: inherit;
+        }
+
+        /* Nút THANH TOÁN */
+        .checkout-btn {
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: white;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hiệu ứng sáng khi hover */
+        .checkout-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+           
+        }
+
+        .checkout-btn:hover::before {
+            left: 100%;
+        }
+
+        
+
+        .checkout-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Nút XÓA GIỎ HÀNG  */
+        .clear-cart-btn {
+            background: white;
+            color: black;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 1px solid #000;
+        }
+
+        
+
+        
+
+        /* Hiệu ứng khi loading (optional) */
+        .checkout-btn.loading,
+        .clear-cart-btn.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .checkout-btn.loading::after,
+        .clear-cart-btn.loading::after {
+            content: '';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+           
+        }
+
+        @keyframes spin {
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        /* Responsive - Mobile */
+        @media (max-width: 480px) {
+            .checkout-btn, 
+            .clear-cart-btn {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+        }
+        #slider {
+            background: url('./assets/img/logo_nike.webp') center/cover no-repeat;
+            height: 350px;
+            margin-top: 80px;
+        }
+        .sort-price {
+            margin: 30px 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .filter-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .filter-group label { font-weight: 700; }
+        .filter-group select, .filter-group input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            background: black;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .filter-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); }
+        .grid-template {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .product-card {
+            text-align: center;
+            padding: 12px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .product-card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+        .product-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 6px; }
+        .discount-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #3ad29f;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        .price-old {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 12px;
+        }
+        .price-new {
+            color: #e74c3c;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal.active { display: block; }
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal-close:hover { color: #000; }
+        .modal h2 { margin-bottom: 20px; color: #333; }
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+        .form-group input, .form-group select {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: black;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        }
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .modal-actions button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: black;
+            color: white;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); }
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        .btn-secondary:hover { background: #e0e0e0; }
+
+        #footer {
+            width: 100vw;
+            margin-left: calc(50% - 50vw) !important;
+            margin-right: calc(50% - 50vw) !important;
+            background-color: #f2f2f2;
+        }
+
+        #footer .back-ground-footer {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            padding-left: 10vw !important;
+            padding-right: 10vw !important;
+            display: flex;
+            padding-top: 5vw;
+            padding-bottom: 5vw;
+        }
+
+        @media (max-width: 900px) { .grid-template { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { 
+            .grid-template { grid-template-columns: 1fr; } 
+            .sort-price { flex-direction: column; }
+            .filter-group { flex-direction: column; align-items: stretch; }
+        }
+    </style>
 </head>
 <body>
+    
     <div id="header">
-            <div class="container-header">
-                <div class="sub-img">
+        <div class="container-header">
+            <div class="sub-img">
+                <a href="index.html">
                     <img src="./assets/img/img2.png" alt="Logo" id="logo">
-                </div>
-                <ul class="nav-list">
-                    <li><a href="">NIKE
-                        <div class="space-top">
-                            <ul class="sub-nav">
-        
-                                <li><a href="">AIR FORCE 1</a></li>
-                                <li><a href="">JORDAN ADIDAS</a></li>
-                                <li><a href="">M2K</a></li>
-                                
-                            </ul>
-
-                        </div>
-                        </a>
-                    </li>
-                    <li><a href="">ADIDAS
-                        <div class="space-top">
-
-                            <ul class="sub-nav">
-                                <li><a href="">SUPER STYLE</a></li>
-                                <li><a href="">ALPHA BOUNCE</a></li>
-        
-                                
-        
-                            </ul>
-                        </div>
-                        </a>
-                    </li>
-                    <li><a href="">PUMA
-                        <div class="space-top">
-
-                            <ul class="sub-nav">
-                        
-                                <li><a href="">ForeverRun</a></li>
-                                <li><a href="">Deviate NITRO</a></li>
-                            </ul>
-                        </div>
-                        </a>
-                    </li>
-                    <li><a href="">HÃNG KHÁC
-                        <div class="space-top">
-
-                            <ul class="sub-nav">
-                        
-                                <li><a href="">MLB</a></li>
-                                <li><a href="">CONVERSE</a></li>
-                                <li><a href="">NEW BALANCE</a></li>
-                            </ul>
-                        </div>
-                        </a>
-                    </li>
-                    <li><a href="">⚡FLASH SALE
-                        <div class="space-top">
-
-                            <ul class="sub-nav">
-                        
-                                <li><a href="">FORUM</a></li>
-                                <li><a href="">SUPER STYLE</a></li>
-                                <li><a href="">ALPHA BOUNCE</a></li>
-        
-                                
-        
-                            </ul>
-                        </div>
-                        </a>
-                    </li>
-                </ul>
-                <div class="search-icon">
-                    <i class="ti-search"></i>
-                    <i class="ti-shopping-cart"></i>
-                </div>
-                <div class = "contact">
-                    
-                </div>
-
-            </div>           
-           
-        </div>
-    </div>
-
-    <div id = "slider">
-        <img src="./assets/img/logo_nike.webp" alt="">
-    </div>
-
-    <div id = "content">
-        <div class="sort-price">
+                </a>
+            </div>
             <ul class="nav-list">
-                    <li><a href="">Thứ tự theo:
-                        <div class="space-top">
-                            <ul class="sub-nav">
-        
-                                <li><a href="">Từ giá thấp đến cao</a></li>
-                                <li><a href="">Từ giá cao đến thấp</a></li>
+                <li><a href="product_nike.html">NIKE</a></li>
+                <li><a href="">ADIDAS</a></li>
+                <li><a href="">PUMA</a></li>
+                <li><a href="">HÃNG KHÁC</a></li>
+                <li><a href="">⚡FLASH SALE</a></li>
+            </ul>
 
-                            </ul>
+            <div class="search-icon">
+                <button id="searchToggle" class="icon-btn" aria-label="Tìm kiếm"><i class="ti-search"></i></button>
 
-                        </div>
-                        </a>
-                    </li>
-        </div>
-        <div class="content-1 grid-template space-margin">
-                    <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                       
-                        <img class="product-img" src="./assets/img/mau1.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-                     <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau2.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau3.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau4.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau4.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau4.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau4.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau4.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                                                    <span class="price-old">850.000₫</span>
-                                                    <span class="price-new">550.000₫</span>
-                        </div>
-        </div>
+                <div id="searchBox" class="search-box" style="display:none;">
+                    <input id="searchInput" type="search" placeholder="Tìm sản phẩm, thương hiệu..." autocomplete="off">
+                    <div id="searchResults" class="search-results" role="listbox"></div>
                 </div>
+
+                <button id="cartBtn" class="icon-btn" aria-label="Giỏ hàng">
+                    <i class="ti-shopping-cart"></i>
+                    <span id="cartBadge" class="cart-badge" style="display:none;">0</span>
+                </button>
+
+                <div id="userIcon" style="margin-left:8px;cursor:pointer;"></div>
             </div>
-
-    <div id="footer">
-            <div class="back-ground-footer">
-
-                <div class ="footer-1">
-                    <img class = "logo-footer" src="./assets/img/img2_new.png"></img>
-                    <p class = "part-footer-1"style ="margin-top: 1vw; margin-bottom: 2vw">
-    CloudySport - Nhà sưu tầm và phân phối chính hãng các thương hiệu thời trang quốc tế hàng đầu Việt Nam</p>
-                    <h4 class ="h4-footer-1" style ="margin-bottom: 1.5vw">THÔNG TIN CỬA HÀNG</h4>
-                    <ul class="infor">
-                        <div class="font">
-                            <li><i class = "fa-solid fa-location-dot"></i> 321 Nguyễn Xiển - Đại Kim - Hoàng Mai - Hà Nội</li>
-                        </div>
-                        <div class="font">
-                            <li><i class ="fa-solid fa-phone"></i>Hotline : 0987654321</li>
-                        </div>
-                        <div class="font">
-                      
-                            <li><i class="fa-solid fa-envelope"></i>Service@CloudySport.com</li>
-                        </div>
-                       
-                    </ul>
-                </div>
-    
-                <div class ="footer-2">
-                    <div class="title">
-                        <h4 class="sub-title" >Về chúng tôi</h4>
-                    </div>
-                    <div class="sub-footer">
-                        <div class ="menu-sub-footer">
-                            Giới Thiệu
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Tuyển dụng
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Dịch Vụ Sửa Giày
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Tin tức - Sự kiện
-                        </div>
-    
-                    </div>
-                    <!-- ....0 -->
-                     <div class="title">
-                        <h4 class="sub-title" >Kết nối với chúng tôi</h4>
-                    </div>
-                    <div class="sub-icon">
-                        <a class ="icon" href="https://www.facebook.com/hoanghip05?locale=vi_VN" title="Kết nối đến Facebook!" target="_blank">
-                            <i class="fa-brands fa-facebook"></i>
-                        </a>
-                        <a class ="icon" href="https://www.instagram.com/hiepnh.solite.15_01/" title="Kết nối đến Instagram!" target="_blank">
-                            <i class="fa-brands fa-square-instagram"></i>
-                        </a>
-                        <a class ="icon" href="https://www.linkedin.com/in/nguy%E1%BB%85n-ho%C3%A0ng-hi%E1%BB%87p-undefined-273ab9338/" title="Kết nối đến Linkedln!" target="_blank">
-                            <i class="fa-brands fa-linkedin"></i></a>
-    
-                    </div>
-                </div>
-                <div class ="footer-3">
-                    <div class="title">
-                        <h4 class="sub-title" >Hỗ trợ Khách hàng</h4>
-                    </div>
-                    <div class="sub-footer">
-                        <div class ="menu-sub-footer">
-                            Hướng dẫn mua hàng
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Chính sách đổi trả và bảo hành
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Chính sách thanh toán
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Chính sách bảo vệ thông tin cá nhân của người tiêu dùng
-                        </div>
-                        <div class ="menu-sub-footer">
-                            Vận chuyển và giao hàng
-                        </div>
-    
-                    </div>
-                </div>
-            </div>
+        </div>
     </div>
-    
 
-    
+    <!-- Slider -->
+    <div id="slider"></div>
+
+    <!-- Main Content -->
+    <div id="content">
+        <div class="container-content">
+            <!-- Filter & Sort Section -->
+            <div class="sort-price">
+                <h2 style="margin: 0;">Giày Nike</h2>
+                <div class="filter-group">
+                    <label for="sortNike">Sắp xếp:</label>
+                    <select id="sortNike">
+                        <option value="default">Mặc định</option>
+                        <option value="price-asc">Giá: thấp → cao</option>
+                        <option value="price-desc">Giá: cao → thấp</option>
+                        <option value="rating-desc">Đánh giá cao</option>
+                    </select>
+
+                    <label style="margin-left: 12px;">Khoảng giá:</label>
+                    <input id="nikeMinPrice" type="number" placeholder="Từ" min="0" style="width:100px;">
+                    <input id="nikeMaxPrice" type="number" placeholder="Đến" min="0" style="width:100px;">
+                    <button id="applyNikeFilter" class="filter-btn">Áp dụng</button>
+                    <button id="clearNikeFilter" class="filter-btn" style="background: #999;">Xóa</button>
+                </div>
+                <div style="margin-top:8px;">
+                    <span id="nikeResultCount" style="color:#666;font-size:14px;">Đang tải...</span>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="nikeProductsGrid" class="grid-template space-margin">
+                <!-- Products will be loaded from API -->
+            </div>
+
+            <!-- Pagination container (INSIDE container-content) -->
+            <div id="nikePagination" style="display:flex;justify-content:center;margin:40px 0;"></div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <img id="modalProductImg" src="" alt="" style="width: 100%; border-radius: 8px;">
+                </div>
+                <div>
+                    <h2 id="modalProductName">Tên sản phẩm</h2>
+                    <div style="margin-bottom: 15px;">
+                        <span class="price-old" id="modalProductPriceOld"></span>
+                        <span class="price-new" id="modalProductPriceNew"></span>
+                    </div>
+                    <p id="modalProductDesc" style="color: #666; margin-bottom: 15px;"></p>
+
+                    <form class="modal-form" id="productActionForm">
+                        <div class="form-group">
+                            <label for="modalSize">Kích cỡ (Size):</label>
+                            <select id="modalSize" required>
+                                <option value="">-- Chọn kích cỡ --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modalColor">Màu sắc:</label>
+                            <select id="modalColor" required>
+                                <option value="">-- Chọn màu --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modalQty">Số lượng:</label>
+                            <input id="modalQty" type="number" min="1" max="99" value="1" required>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="button" class="btn-primary" id="addToCartBtn">
+                                <i class="ti-shopping-cart"></i> Thêm giỏ hàng
+                            </button>
+                            <button type="button" class="btn-primary" id="buyNowBtn">
+                                <i class="fa-solid fa-bolt"></i> Đặt hàng ngay
+                            </button>
+                            <button type="button" class="btn-secondary" id="closeModalBtn">Đóng</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+        <div class="back-ground-footer">
+            <div class="footer-1">
+                <img src="./assets/img/img2_new.png" alt="">
+                <p class="part-footer-1" style="margin-top: 1vw; margin-bottom: 2vw">
+                    CloudySport - Nhà sưu tầm và phân phối chính hãng các thương hiệu thời trang quốc tế hàng đầu Việt Nam
+                </p>
+                <h4 class="h4-footer-1" style="margin-bottom: 1.5vw">THÔNG TIN CỬA HÀNG</h4>
+                <ul class="infor">
+                    <div class="font">
+                        <li><i class="fa-solid fa-location-dot"></i> 321 Nguyễn Xiển - Đại Kim - Hoàng Mai - Hà Nội</li>
+                    </div>
+                    <div class="font">
+                        <li><i class="fa-solid fa-phone"></i>Hotline : 0987654321</li>
+                    </div>
+                    <div class="font">
+                        <li><i class="fa-solid fa-envelope"></i>Service@CloudySport.com</li>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="footer-2">
+                <div class="title">
+                    <h4 class="sub-title">Về chúng tôi</h4>
+                </div>
+                <div class="sub-footer">
+                    <div class="menu-sub-footer">Giới Thiệu</div>
+                    <div class="menu-sub-footer">Tuyển dụng</div>
+                    <div class="menu-sub-footer">Dịch Vụ Sửa Giày</div>
+                    <div class="menu-sub-footer">Tin tức - Sự kiện</div>
+                </div>
+                <div class="title">
+                    <h4 class="sub-title">Kết nối với chúng tôi</h4>
+                </div>
+                <div class="sub-icon">
+                    <a class="icon" href="https://www.facebook.com/" title="Kết nối đến Facebook!" target="_blank">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a class="icon" href="https://www.instagram.com/" title="Kết nối đến Instagram!" target="_blank">
+                        <i class="fa-brands fa-square-instagram"></i>
+                    </a>
+                    <a class="icon" href="https://www.linkedin.com/" title="Kết nối đến LinkedIn!" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-3">
+                <div class="title">
+                    <h4 class="sub-title">Hỗ trợ Khách hàng</h4>
+                </div>
+                <div class="sub-footer">
+                    <div class="menu-sub-footer">Hướng dẫn mua hàng</div>
+                    <div class="menu-sub-footer">Chính sách đổi trả và bảo hành</div>
+                    <div class="menu-sub-footer">Chính sách thanh toán</div>
+                    <div class="menu-sub-footer">Chính sách bảo vệ thông tin cá nhân</div>
+                    <div class="menu-sub-footer">Vận chuyển và giao hàng</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/user-profile.js"></script>
+    <script src="./assets/js/search-cart.js"></script>
+    <script src="./assets/js/nike-products.js"></script>
+
 </body>
+</html>

@@ -1,304 +1,321 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Product Page</title>
-   <link rel="stylesheet" href="./assets/css/styles1.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-   <link rel="stylesheet" href="./assets/font/themify-icons-font/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm - CloudySport</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/product-detail.css">
+    <link rel="stylesheet" href="./assets/font/themify-icons-font/themify-icons/themify-icons.css">
 </head>
 <body>
-        <div id="header">
-            <div class="container-header">
-                <div class="sub-img">
-                    <img src="./assets/img/img2.png" alt="Logo" id="logo">
-                </div>
-                <ul class="nav-list">
-                    <li><a href="">NIKE
-                        <div class="space-top">
-                            <ul class="sub-nav">
-        
-                                <li><a href="">AIR FORCE 1</a></li>
-                                <li><a href="">JORDAN ADIDAS</a></li>
-                                <li><a href="">M2K</a></li>
-                                
-                            </ul>
+    <style>
+        .checkout-btn, 
+        .clear-cart-btn {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: inherit;
+        }
 
-                        </div>
-                        </a>
-                    </li>
-                    <li><a href="">ADIDAS
-                        <div class="space-top">
+        /* Nút THANH TOÁN - Đen chủ đạo */
+        .checkout-btn {
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: white;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
 
-                            <ul class="sub-nav">
-                                <li><a href="">SUPER STYLE</a></li>
-                                <li><a href="">ALPHA BOUNCE</a></li>
-        
-                                
-        
-                            </ul>
-                        </div>
-                        </a>
-                    </li>
-                    <li><a href="">PUMA
-                        <div class="space-top">
-
-                            <ul class="sub-nav">
-                        
-                                <li><a href="">ForeverRun</a></li>
-                                <li><a href="">Deviate NITRO</a></li>
-                            </ul>
-                        </div>
-                        </a>
-                    </li>
-                    <li><a href="">HÃNG KHÁC
-                        <div class="space-top">
-
-                            <ul class="sub-nav">
-                        
-                                <li><a href="">MLB</a></li>
-                                <li><a href="">CONVERSE</a></li>
-                                <li><a href="">NEW BALANCE</a></li>
-                            </ul>
-                        </div>
-                        </a>
-                    </li>
-                    <li><a href="">⚡FLASH SALE
-                        <div class="space-top">
-
-                            <ul class="sub-nav">
-                        
-                                <li><a href="">FORUM</a></li>
-                                <li><a href="">SUPER STYLE</a></li>
-                                <li><a href="">ALPHA BOUNCE</a></li>
-        
-                                
-        
-                            </ul>
-                        </div>
-                        </a>
-                    </li>
-                </ul>
-                <div class="search-icon">
-                    <i class="ti-search"></i>
-                    <i class="ti-shopping-cart"></i>
-                </div>
-                <div class = "contact">
-                    
-                </div>
-
-            </div>           
+        /* Hiệu ứng sáng khi hover */
+        .checkout-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
            
-        </div>
+        }
 
-        <div id="content">
-            <div class = "content-container">
-                <div class = "img-product">
-                    <img src="./assets/img/mau1.jpg" alt="">
-                </div>
-                <div class = "detail-product">
-                    <h2>GIÀY THỂ THAO NAM NIKE AIR FORCE 1 '07 ESSENTIAL</h2>
-                    <span class="price-old">850.000₫</span>
-                    <span class="price-new">550.000₫</span>
-                    <p class="info-product-color">Màu sắc: Trắng</p>
-                    <p class="info-product-size">Size
-                    </p>
-                    <button class = "de-size">39</button>
-                    <button class = "de-size">40</button>
-                    <button class = "de-size">41</button>
-                    <button class = "de-size">42</button>
-                    <button class = "de-size">43</button>
-                    <a href="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mgbzqk31c9hq69.webp"> 
-                        <p>hướng dẫn chọn size giày</p>
+        .checkout-btn:hover::before {
+            left: 100%;
+        }
+
+        
+
+        .checkout-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Nút XÓA GIỎ HÀNG  */
+        .clear-cart-btn {
+            background: white;
+            color: black;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 1px solid #000;
+        }
+
+        
+
+        
+
+        /* Hiệu ứng khi loading (optional) */
+        .checkout-btn.loading,
+        .clear-cart-btn.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .checkout-btn.loading::after,
+        .clear-cart-btn.loading::after {
+            content: '';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+           
+        }
+
+        @keyframes spin {
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        /* Responsive - Mobile */
+        @media (max-width: 480px) {
+            .checkout-btn, 
+            .clear-cart-btn {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <!-- Header -->
+    <div id="header">
+        <div class="container-header">
+            <div class="sub-img">
+                <a href="index.html">
+                    <img src="./assets/img/img2.png" alt="Logo" id="logo">
+                </a>
+            </div>
+            <ul class="nav-list">
+                <li><a href="product_nike.html">NIKE
+                        
                     </a>
-                    <p class="quantit-product">Số lượng
-                    </p>
-                    <button class = "count">
-                        <div class = "ti-minus"></div>
-                        <input type="number" name="quantity" value="1" min="1" max="3">
-                        <div class = "ti-plus"></div>
-                    </button>
-                    <div>
+                </li>
+                <li><a href="">ADIDAS
                     
-                    </div>
-                    <button class="btn-buy">Mua Ngay</button>
+                    </a>
+                </li>
+                <li><a href="">PUMA
+                    
+                    </a>
+                </li>
+                <li><a href="">HÃNG KHÁC
+                    
+                    </a>
+                </li>
+                <li><a href="">⚡FLASH SALE
+                    
+                    </a>
+                </li>
+            </ul>
+            <div class="search-icon">
+                <button id="searchToggle" class="icon-btn" aria-label="Tìm kiếm"><i class="ti-search"></i></button>
 
-                    <button class="btn-add-cart">
-                        <i class="ti-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                <div id="searchBox" class="search-box" style="display:none;">
+                    <input id="searchInput" type="search" placeholder="Tìm sản phẩm, thương hiệu..." autocomplete="off">
+                    <div id="searchResults" class="search-results" role="listbox"></div>
+                </div>
+
+                <button id="cartBtn" class="icon-btn" aria-label="Giỏ hàng">
+                    <i class="ti-shopping-cart"></i>
+                    <span id="cartBadge" class="cart-badge" style="display:none;">0</span>
+                </button>
+
+                <div id="userIcon" style="cursor: pointer;"></div>
+            </div>
+        </div>           
+    </div>
+
+    <!-- Content chính -->
+    <div id="content">
+        <div class="container-content" style="margin-top: 100px;">
+            <div class="product-detail-wrapper">
+                <!-- Hình ảnh sản phẩm -->
+                <div class="product-detail-image">
+                    <img id="p-img" src="" alt="Produto" class="main-image">
+                    <div class="discount-badge-detail" id="discountBadge"></div>
+                </div>
+
+                <!-- Thông tin sản phẩm -->
+                <div class="product-detail-info">
+                    <h1 id="p-name">Đang tải...</h1>
+                    
+                    <div class="rating-section">
+                        <div class="stars" id="ratingStars"></div>
+                        <span id="reviewCount" class="review-count"></span>
+                    </div>
+
+                    <!-- Giá -->
+                    <div class="price-section">
+                        <span id="p-price-old" class="price-old"></span>
+                        <span id="p-price-new" class="price-new"></span>
+                        <span id="discountPercent" class="discount-percent"></span>
+                    </div>
+                    <p id="p-desc" class="product-description"></p>
+
+                    <!-- Màu sắc -->
+                    <div class="product-colors">
+                        <p class="label">Màu sắc:</p>
+                        <div id="colorButtons" class="color-options"></div>
+                    </div>
+
+                    <!-- Kích cỡ -->
+                    <div class="product-sizes">
+                        <p class="label">Kích cỡ (Size):</p>
+                        <div id="sizeButtons" class="size-options"></div>
+                    </div>
+
+                    <!-- Số lượng -->
+                    <div class="product-quantity">
+                        <p class="label">Số lượng:</p>
+                        <div class="quantity-control">
+                            <button id="minus" class="qty-btn">−</button>
+                            <input id="qty" type="number" value="1" min="1" max="99">
+                            <button id="plus" class="qty-btn">+</button>
+                        </div>
+                        <span id="stockStatus" class="stock-status"></span>
+                    </div>
+
+                    <!-- Nút hành động -->
+                    <div class="product-actions">
+                        <button id="buy" class="btn-buy">
+                            <i class="fa-solid fa-bolt"></i> Mua Ngay
+                        </button>
+                        <button id="addcart" class="btn-add-cart">
+                            <i class="ti-shopping-cart"></i> Thêm Vào Giỏ
+                        </button>
+                    </div>
+
+                    <!-- Thông tin thêm -->
+                    <div class="product-info-details">
+                        <div class="info-item">
+                            <i class="fa-solid fa-truck"></i>
+                            <div>
+                                <h4>Giao hàng nhanh</h4>
+                                <p>Miễn phí cho đơn từ 500.000₫</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-shield"></i>
+                            <div>
+                                <h4>Chính hãng 100%</h4>
+                                <p>Bảo hành 12 tháng</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-undo"></i>
+                            <div>
+                                <h4>Hoàn tiền 30 ngày</h4>
+                                <p>Nếu không hài lòng</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="contact">
-                <div class="title">
-                    <p>Liên hệ với chúng tôi: <i class="fa-solid fa-phone-volume"></i> 0123456789</p>
-                </div>
-                
-                <div class="sub-icon">
-                <h4 class="sub-title" >Kết nối với chúng tôi:
+        </div>
+    </div>
 
-                    <a class ="icon" href="https://www.facebook.com/hoanghip05?locale=vi_VN" title="Kết nối đến Facebook!" target="_blank">
+    <!-- Footer -->
+    <div id="footer">
+        <div class="back-ground-footer">
+            <div class ="footer-1">
+                <img src="./assets/img/img2_new.png" alt="">
+                <p class = "part-footer-1" style ="margin-top: 1vw; margin-bottom: 2vw">
+                    CloudySport - Nhà sưu tầm và phân phối chính hãng các thương hiệu thời trang quốc tế hàng đầu Việt Nam
+                </p>
+                <h4 class ="h4-footer-1" style ="margin-bottom: 1.5vw">THÔNG TIN CỬA HÀNG</h4>
+                <ul class="infor">
+                    <div class="font">
+                        <li><i class = "fa-solid fa-location-dot"></i> 321 Nguyễn Xiển - Đại Kim - Hoàng Mai - Hà Nội</li>
+                    </div>
+                    <div class="font">
+                        <li><i class ="fa-solid fa-phone"></i>Hotline : 0987654321</li>
+                    </div>
+                    <div class="font">
+                        <li><i class="fa-solid fa-envelope"></i>Service@CloudySport.com</li>
+                    </div>
+                </ul>
+            </div>
+
+            <div class ="footer-2">
+                <div class="title">
+                    <h4 class="sub-title" >Về chúng tôi</h4>
+                </div>
+                <div class="sub-footer">
+                    <div class ="menu-sub-footer">Giới Thiệu</div>
+                    <div class ="menu-sub-footer">Tuyển dụng</div>
+                    <div class ="menu-sub-footer">Dịch Vụ Sửa Giày</div>
+                    <div class ="menu-sub-footer">Tin tức - Sự kiện</div>
+                </div>
+                <div class="title">
+                    <h4 class="sub-title" >Kết nối với chúng tôi</h4>
+                </div>
+                <div class="sub-icon">
+                    <a class ="icon" href="https://www.facebook.com/" title="Kết nối đến Facebook!" target="_blank">
                         <i class="fa-brands fa-facebook"></i>
                     </a>
-                    <a class ="icon" href="https://www.instagram.com/hiepnh.solite.15_01/" title="Kết nối đến Instagram!" target="_blank">
+                    <a class ="icon" href="https://www.instagram.com/" title="Kết nối đến Instagram!" target="_blank">
                         <i class="fa-brands fa-square-instagram"></i>
                     </a>
-                    <a class ="icon" href="https://www.linkedin.com/in/nguy%E1%BB%85n-ho%C3%A0ng-hi%E1%BB%87p-undefined-273ab9338/" title="Kết nối đến Linkedln!" target="_blank">
-                        <i class="fa-brands fa-linkedin"></i></a>
-                </h4>
-    
+                    <a class ="icon" href="https://www.linkedin.com/" title="Kết nối đến LinkedIn!" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
                 </div>
-                </p>
-            </div>
-        </div>
-
-        <div id = "suggestions">
-            <div class = "h2-container">
-             <h1>CÓ THỂ BẠN SẼ THÍCH</h1>
             </div>
 
-            <div class="suggest-product">
-                    <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                       
-                        <img class="product-img" src="./assets/img/mau1.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-                     <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau2.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau3.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau4.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-
-                    <div class="product-card">
-                        <span class="discount-badge">35%</span>
-                        <img class="product-img" src="./assets/img/mau4.jpg" alt="Tên sản phẩm">
-                        <div class="product-name">Nike Dunk Low Retro Đen Trắng REP 1:1</div>
-                        <div>
-                            <span class="price-old">850.000₫</span>
-                            <span class="price-new">550.000₫</span>
-                        </div>
-                    </div>
-        </div>
-        </div>
-    <div id="footer">
-            <div class="back-ground-footer">
-
-                <div class ="footer-1">
-                    <img class = "logo-footer" src="./assets/img/img2_new.png"></img>
-                    <p class = "part-footer-1"style ="margin-top: 1vw; margin-bottom: 2vw">
-    CloudySport - Nhà sưu tầm và phân phối chính hãng các thương hiệu thời trang quốc tế hàng đầu Việt Nam</p>
-                    <h4 class ="h4-footer-1" style ="margin-bottom: 1.5vw">THÔNG TIN CỬA HÀNG</h4>
-                    <ul class="infor">
-                        <div class="font">
-                            <li><i class = "fa-solid fa-location-dot"></i> 321 Nguyễn Xiển - Đại Kim - Hoàng Mai - Hà Nội</li>
-                        </div>
-                        <div class="font">
-                            <li><i class ="fa-solid fa-phone"></i>Hotline : 0987654321</li>
-                        </div>
-                        <div class="font">
-                      
-                            <li><i class="fa-solid fa-envelope"></i>Service@CloudySport.com</li>
-                        </div>
-                       
-                    </ul>
+            <div class ="footer-3">
+                <div class="title">
+                    <h4 class="sub-title" >Hỗ trợ Khách hàng</h4>
                 </div>
-    
-                <div class ="footer-2">
-                    <div class="title">
-                        <h4 class="sub-title" >Về chúng tôi</h4>
-                    </div>
-                    <div class="sub-footer">
-                        <div class ="menu-sub-footer">
-                            Giới Thiệu
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Tuyển dụng
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Dịch Vụ Sửa Giày
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Tin tức - Sự kiện
-                        </div>
-    
-                    </div>
-                    <!-- ....0 -->
-                     <div class="title">
-                        <h4 class="sub-title" >Kết nối với chúng tôi</h4>
-                    </div>
-                    <div class="sub-icon">
-                        <a class ="icon" href="https://www.facebook.com/hoanghip05?locale=vi_VN" title="Kết nối đến Facebook!" target="_blank">
-                            <i class="fa-brands fa-facebook"></i>
-                        </a>
-                        <a class ="icon" href="https://www.instagram.com/hiepnh.solite.15_01/" title="Kết nối đến Instagram!" target="_blank">
-                            <i class="fa-brands fa-square-instagram"></i>
-                        </a>
-                        <a class ="icon" href="https://www.linkedin.com/in/nguy%E1%BB%85n-ho%C3%A0ng-hi%E1%BB%87p-undefined-273ab9338/" title="Kết nối đến Linkedln!" target="_blank">
-                            <i class="fa-brands fa-linkedin"></i></a>
-    
-                    </div>
+                <div class="sub-footer">
+                    <div class ="menu-sub-footer">Hướng dẫn mua hàng</div>
+                    <div class ="menu-sub-footer">Chính sách đổi trả và bảo hành</div>
+                    <div class ="menu-sub-footer">Chính sách thanh toán</div>
+                    <div class ="menu-sub-footer">Chính sách bảo vệ thông tin cá nhân</div>
+                    <div class ="menu-sub-footer">Vận chuyển và giao hàng</div>
                 </div>
-                <div class ="footer-3">
-                    <div class="title">
-                        <h4 class="sub-title" >Hỗ trợ Khách hàng</h4>
-                    </div>
-                    <div class="sub-footer">
-                        <div class ="menu-sub-footer">
-                            Hướng dẫn mua hàng
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Chính sách đổi trả và bảo hành
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Chính sách thanh toán
-                        </div>
-    
-                        <div class ="menu-sub-footer">
-                            Chính sách bảo vệ thông tin cá nhân của người tiêu dùng
-                        </div>
-                        <div class ="menu-sub-footer">
-                            Vận chuyển và giao hàng
-                        </div>
-    
-                    </div>
             </div>
         </div>
+    </div>
 
-        </div>
-
+    <!-- Scripts - Thứ tự rất quan trọng -->
+   
+        <!-- Scripts - Thứ tự rất quan trọng -->
+   
+        <!-- Scripts - Thứ tự rất quan trọng -->
+   
+    <script src="./assets/js/user-profile.js"></script>
+    <script src="./assets/js/search-cart.js"></script>
+    <script src="./assets/js/detail-products.js"></script>
+    
+        
 </body>
 </html>

@@ -1,0 +1,708 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "user@example.com",
+      "username": "user123",
+      "password": "password123",
+      "fullname": "Nguyễn Hoàng Hiệp",
+      "phone": "0987654321",
+      "address": "123 Đường Lê Trọng Tấn, Hà Nội",
+      "createdAt": "2025-01-01T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "email": "admin@cloudy.com",
+      "username": "admin",
+      "password": "admin123",
+      "fullname": "Admin CloudySport",
+      "phone": "0123456789",
+      "address": "321 Nguyễn Xiển, Hà Nội",
+      "createdAt": "2025-01-01T10:00:00Z"
+    },
+    {
+      "email": "nguyenhoanqhiep2k5@gmail.com",
+      "username": "hiepnguyen2005",
+      "password": "1512005",
+      "fullname": "ca mam",
+      "phone": "0983149710",
+      "address": "Hà Nam",
+      "createdAt": "2025-12-11T10:44:23.956Z",
+      "id": 3
+    },
+    {
+      "email": "lo100nam@gmail.com",
+      "username": "lo100nam",
+      "password": "lo100nam",
+      "fullname": "lo100nam",
+      "phone": "0983149710",
+      "address": "Giải phóng",
+      "createdAt": "2025-12-11T11:23:34.394Z",
+      "id": 4
+    }
+  ],
+  "products": [
+    {
+      "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+      "price": 850000,
+      "finalPrice": 450000,
+      "stock": 40,
+      "image": "./assets/img/mau1.jpg",
+      "description": "Giày Nike Air Force 1 chính hãng, thiết kế cổ điển, đế êm ái",
+      "brand": "NIKE",
+      "rating": 4.5,
+      "reviews": 0,
+      "color": [
+        "White",
+        "Black",
+        "Red"
+      ],
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "discount": 47,
+      "id": "prod1"
+    },
+    {
+      "id": "prod2",
+      "name": "NEW BALANCE / MẪU 2",
+      "brand": "NEW BALANCE",
+      "price": 800000,
+      "discount": 35,
+      "finalPrice": 520000,
+      "image": "./assets/img/mau2.jpg",
+      "description": "Giày New Balance chất lượng cao, phong cách casual",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "color": [
+        "White"
+      ],
+      "stock": 35,
+      "rating": 4.3,
+      "reviews": 85
+    },
+    {
+      "id": "prod3",
+      "name": "Nike Dunk Low Retro Đen Trắng REP 1:1",
+      "brand": "NIKE",
+      "price": 850000,
+      "discount": 35,
+      "finalPrice": 550000,
+      "image": "./assets/img/mau3.jpg",
+      "description": "Nike Dunk Low Retro phiên bản đen trắng, bản sao 1:1 chính xác",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "White"
+      ],
+      "stock": 25,
+      "rating": 4.7,
+      "reviews": 200
+    },
+    {
+      "id": "prod4",
+      "name": "Nike Air Max 90 Essential",
+      "brand": "NIKE",
+      "price": 920000,
+      "discount": 30,
+      "finalPrice": 644000,
+      "image": "./assets/img/mau4.jpg",
+      "description": "Nike Air Max 90 với công nghệ Air cushioning, thoải mái cả ngày",
+      "size": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "color": [
+        "White"
+      ],
+      "stock": 40,
+      "rating": 4.6,
+      "reviews": 150
+    },
+    {
+      "id": "prod5",
+      "name": "Nike Revolution 6",
+      "brand": "NIKE",
+      "price": 650000,
+      "discount": 25,
+      "finalPrice": 487500,
+      "image": "./assets/img/mau5.jpg",
+      "description": "Giày chạy bộ Nike Revolution 6 nhẹ và thoải mái",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "White"
+      ],
+      "stock": 60,
+      "rating": 4.4,
+      "reviews": 180
+    },
+    {
+      "id": "prod6",
+      "name": "Nike Blazer Mid '77",
+      "brand": "NIKE",
+      "price": 780000,
+      "discount": 40,
+      "finalPrice": 468000,
+      "image": "./assets/img/mau6.jpg",
+      "description": "Nike Blazer Mid '77 vintage style, phong cách retro đẹp mắt",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "color": [
+        "White"
+      ],
+      "stock": 35,
+      "rating": 4.8,
+      "reviews": 220
+    },
+    {
+      "id": "prod7",
+      "name": "Nike Cortez Classic",
+      "brand": "NIKE",
+      "price": 750000,
+      "discount": 20,
+      "finalPrice": 600000,
+      "image": "./assets/img/mau7.jpg",
+      "description": "Nike Cortez Classic huyền thoại, thiết kế tối giản nhưng sang trọng",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "White"
+      ],
+      "stock": 45,
+      "rating": 4.5,
+      "reviews": 165
+    },
+    {
+      "id": "prod8",
+      "name": "Nike SB Dunk Low Pro",
+      "brand": "NIKE",
+      "price": 950000,
+      "discount": 15,
+      "finalPrice": 807500,
+      "image": "./assets/img/mau8.jpg",
+      "description": "Nike SB Dunk Low Pro cho skateboarding, đế chống trượt chất lượng cao",
+      "size": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "White"
+      ],
+      "stock": 30,
+      "rating": 4.7,
+      "reviews": 140
+    },
+    {
+      "name": "NIKE AIR FLY ARES 432",
+      "price": 1000000,
+      "finalPrice": 800000,
+      "stock": 22,
+      "image": "./assets/img/mau9.jpg",
+      "description": "rrr",
+      "brand": "NIKE",
+      "rating": 4.5,
+      "reviews": 0,
+      "color": [
+        "White"
+      ],
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "discount": 20,
+      "id": "BgamDhB"
+    },
+    {
+      "name": "NIKE AIR FORCE 31017",
+      "price": 1000000,
+      "finalPrice": 800000,
+      "stock": 66,
+      "image": "./assets/img/mau5.jpg",
+      "description": "moi",
+      "brand": "NIKE",
+      "rating": 4.5,
+      "reviews": 0,
+      "color": [
+        "White"
+      ],
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "discount": 20,
+      "id": "-Qn8VSp"
+    },
+    {
+      "name": "catta",
+      "price": 1000000,
+      "finalPrice": 200000,
+      "stock": 32,
+      "image": "./assets/img/mau4.jpg",
+      "description": "haha",
+      "brand": "NIKE",
+      "rating": 4.5,
+      "reviews": 0,
+      "color": [
+        "White",
+        "Black",
+        "Red"
+      ],
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "discount": 80,
+      "id": "gVDv6K3"
+    }
+  ],
+  "orders": [
+    {
+      "userId": 1,
+      "orderDate": "2025-12-09T12:43:04.438Z",
+      "status": "delivered",
+      "shippingInfo": {
+        "firstName": "Nguyễn",
+        "lastName": "Hùng Anh",
+        "email": "user@example.com",
+        "phone": "0987654321",
+        "address": "123 Đường ABC, TP.HCM",
+        "district": "hai Ba Trung",
+        "city": "Danang",
+        "notes": ""
+      },
+      "shippingMethod": "express",
+      "paymentMethod": "cod",
+      "items": [
+        {
+          "id": "prod1",
+          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+          "price": 550000,
+          "image": "./assets/img/mau1.jpg",
+          "size": 37,
+          "color": "Black",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 579000,
+      "id": 1,
+      "completedAt": "2025-12-09T14:04:37.904Z"
+    },
+    {
+      "userId": 1,
+      "orderDate": "2025-12-10T12:40:56.349Z",
+      "status": "pending",
+      "shippingInfo": {
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng Hiệp",
+        "email": "user@example.com",
+        "phone": "0987654321",
+        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
+        "district": "khong yeu em",
+        "city": "Hanoi",
+        "notes": ""
+      },
+      "shippingMethod": "express",
+      "paymentMethod": "cod",
+      "items": [
+        {
+          "id": "prod1",
+          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+          "price": 650000,
+          "image": "./assets/img/mau1.jpg",
+          "size": 36,
+          "color": "White",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 679000,
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "orderDate": "2025-12-10T12:51:22.812Z",
+      "status": "pending",
+      "shippingInfo": {
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng Hiệp",
+        "email": "user@example.com",
+        "phone": "0987654321",
+        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
+        "district": "quang trung",
+        "city": "Danang",
+        "notes": ""
+      },
+      "shippingMethod": "express",
+      "paymentMethod": "cod",
+      "items": [
+        {
+          "id": "prod1",
+          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+          "price": 650000,
+          "image": "./assets/img/mau1.jpg",
+          "size": 36,
+          "color": "White",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 679000,
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "orderDate": "2025-12-10T12:52:46.235Z",
+      "status": "delivered",
+      "shippingInfo": {
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng Hiệp",
+        "email": "user@example.com",
+        "phone": "0987654321",
+        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
+        "district": "khong yeu em",
+        "city": "Danang",
+        "notes": ""
+      },
+      "shippingMethod": "express",
+      "paymentMethod": "cod",
+      "items": [
+        {
+          "id": "prod2",
+          "name": "NEW BALANCE / MẪU 2",
+          "price": 520000,
+          "image": "./assets/img/mau2.jpg",
+          "size": 38,
+          "color": "Gray",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 549000,
+      "id": 4,
+      "completedAt": "2025-12-10T15:42:47.671Z"
+    },
+    {
+      "userId": 1,
+      "orderDate": "2025-12-10T13:03:35.780Z",
+      "status": "delivered",
+      "shippingInfo": {
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng Hiệp",
+        "email": "user@example.com",
+        "phone": "0987654321",
+        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
+        "district": "khong yeu em",
+        "city": "Danang",
+        "notes": ""
+      },
+      "shippingMethod": "express",
+      "paymentMethod": "cod",
+      "items": [
+        {
+          "id": "prod2",
+          "name": "NEW BALANCE / MẪU 2",
+          "price": 520000,
+          "image": "./assets/img/mau2.jpg",
+          "size": 36,
+          "color": "Gray",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 549000,
+      "id": 5,
+      "completedAt": "2025-12-10T15:42:42.722Z"
+    },
+    {
+      "userId": 1,
+      "orderDate": "2025-12-10T13:32:51.785Z",
+      "status": "delivered",
+      "shippingInfo": {
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng Hiệp",
+        "email": "user@example.com",
+        "phone": "0987654321",
+        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
+        "district": "kim chi",
+        "city": "Hanoi",
+        "notes": ""
+      },
+      "shippingMethod": "standard",
+      "paymentMethod": "cod",
+      "items": [
+        {
+          "id": "prod1",
+          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+          "price": 650000,
+          "image": "./assets/img/mau1.jpg",
+          "size": "37",
+          "color": "White",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 650000,
+      "id": 6,
+      "completedAt": "2025-12-10T15:42:31.507Z"
+    },
+    {
+      "userId": 1,
+      "orderDate": "2025-12-10T15:45:05.236Z",
+      "status": "delivered",
+      "shippingInfo": {
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng Hiệp",
+        "email": "user@example.com",
+        "phone": "0987654321",
+        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
+        "district": "khong yeu em",
+        "city": "TPHCM",
+        "notes": ""
+      },
+      "shippingMethod": "express",
+      "paymentMethod": "cod",
+      "items": [
+        {
+          "id": "prod1",
+          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+          "price": 450000,
+          "image": "./assets/img/mau1.jpg",
+          "size": "38",
+          "color": "Black",
+          "quantity": 1
+        },
+        {
+          "id": "prod1",
+          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+          "price": 450000,
+          "image": "./assets/img/mau1.jpg",
+          "size": "38",
+          "color": "Black",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 929000,
+      "id": 7,
+      "completedAt": "2025-12-11T10:57:33.273Z"
+    },
+    {
+      "userId": 3,
+      "orderDate": "2025-12-11T08:17:15.244Z",
+      "status": "pending",
+      "shippingInfo": {
+        "firstName": "nguyen",
+        "lastName": "hiep",
+        "email": "htthvip@gmail.com",
+        "phone": "0987654321",
+        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
+        "district": "khong yeu em",
+        "city": "Danang",
+        "notes": ""
+      },
+      "shippingMethod": "standard",
+      "paymentMethod": "cod",
+      "items": [
+        {
+          "id": "prod1",
+          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+          "price": 750000,
+          "image": "./assets/img/mau1.jpg",
+          "size": 36,
+          "color": "Black",
+          "quantity": 1
+        },
+        {
+          "id": "prod1",
+          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+          "price": 750000,
+          "image": "./assets/img/mau1.jpg",
+          "size": 36,
+          "color": "Black",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 1500000,
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "orderDate": "2025-12-11T10:36:52.488Z",
+      "status": "pending",
+      "shippingInfo": {
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng Hiệp",
+        "email": "user@example.com",
+        "phone": "0987654321",
+        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
+        "district": "khong yeu em",
+        "city": "Hanoi",
+        "notes": ""
+      },
+      "shippingMethod": "express",
+      "paymentMethod": "cod",
+      "items": [
+        {
+          "id": "prod1",
+          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+          "price": 750000,
+          "image": "./assets/img/mau1.jpg",
+          "size": 36,
+          "color": "Black",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 779000,
+      "id": 9
+    },
+    {
+      "userId": 1,
+      "orderDate": "2025-12-11T10:42:56.616Z",
+      "status": "pending",
+      "shippingInfo": {
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng Hiệp",
+        "email": "user@example.com",
+        "phone": "0987654321",
+        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
+        "district": "khong yeu em",
+        "city": "Danang",
+        "notes": ""
+      },
+      "shippingMethod": "standard",
+      "paymentMethod": "cod",
+      "items": [
+        {
+          "id": "prod3",
+          "name": "Nike Dunk Low Retro Đen Trắng REP 1:1",
+          "price": 550000,
+          "image": "./assets/img/mau3.jpg",
+          "size": 36,
+          "color": "White",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 550000,
+      "id": 10
+    },
+    {
+      "userId": 3,
+      "orderDate": "2025-12-11T11:00:18.491Z",
+      "status": "delivered",
+      "shippingInfo": {
+        "firstName": "ca",
+        "lastName": "mam",
+        "email": "nguyenhoanqhiep2k5@gmail.com",
+        "phone": "0983149710",
+        "address": "Hà Nam",
+        "district": "quang trung",
+        "city": "Danang",
+        "notes": ""
+      },
+      "shippingMethod": "standard",
+      "paymentMethod": "cod",
+      "items": [
+        {
+          "id": "prod1",
+          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+          "price": 450000,
+          "image": "./assets/img/mau1.jpg",
+          "size": "38",
+          "color": "Black",
+          "quantity": 1
+        },
+        {
+          "id": "prod1",
+          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
+          "price": 450000,
+          "image": "./assets/img/mau1.jpg",
+          "size": 38,
+          "color": "Red",
+          "quantity": 5
+        }
+      ],
+      "totalAmount": 2700000,
+      "id": 11,
+      "completedAt": "2025-12-11T11:20:49.743Z"
+    }
+  ],
+  "cart": [
+    {
+      "userId": 3,
+      "productId": "prod1",
+      "quantity": 1,
+      "selectedSize": "38",
+      "selectedColor": "White",
+      "id": 1
+    }
+  ]
+}

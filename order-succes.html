@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt hàng thành công - CloudySport</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/font/themify-icons-font/themify-icons/themify-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0ecec 0%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .success-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin-top: 80px;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 50px 40px;
+            text-align: center;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #3ad29f 0%, #2ecc71 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease 0.2s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .success-icon i {
+            font-size: 50px;
+            color: white;
+        }
+
+        .success-card h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .success-card .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            background: #3ad29f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .progress-step p {
+            font-size: 12px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .order-info {
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .order-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .order-info-row:last-child {
+            border-bottom: none;
+        }
+
+        .order-info-row .label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .order-info-row .value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .order-info-row .value.highlight {
+            color: black;
+            font-size: 18px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, black 0%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: black;
+            border: 2px solid black;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f7ff;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-item i {
+            font-size: 32px;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Header override for this page */
+        #header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .success-card {
+                padding: 40px 25px;
+            }
+
+            .success-card h1 {
+                font-size: 24px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .progress-steps {
+                gap: 10px;
+            }
+
+            .step-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header">
+        <div class="container-header">
+            <div class="sub-img">
+                <a href="index.html">
+                    <img src="./assets/img/img2.png" alt="Logo" id="logo">
+                </a>
+            </div>
+            <ul class="nav-list">
+                <li><a href="product_nike.html">NIKE</a></li>
+                <li><a href="">ADIDAS</a></li>
+                <li><a href="">PUMA</a></li>
+                <li><a href="">HÃNG KHÁC</a></li>
+                <li><a href="">⚡FLASH SALE</a></li>
+            </ul>
+            <div class="search-icon">
+                <button id="searchToggle" class="icon-btn"><i class="ti-search"></i></button>
+                <button id="cartBtn" class="icon-btn">
+                    <i class="ti-shopping-cart"></i>
+                    <span id="cartBadge" class="cart-badge" style="display:none;">0</span>
+                </button>
+                <div id="userIcon"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Content -->
+    <div class="success-container">
+        <div class="success-card">
+            <!-- Success Icon -->
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+
+            <!-- Title -->
+            <h1>🎉 Đặt hàng thành công!</h1>
+            <p class="subtitle">
+                Cảm ơn bạn đã mua hàng tại CloudySport. Chúng tôi đã nhận được đơn hàng của bạn và đang xử lý.
+            </p>
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="progress-step">
+                    <div class="step-circle">✓</div>
+                    <p>Giỏ hàng</p>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">✓</div>
+                    <p>Thanh toán</p>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle">✓</div>
+                    <p>Hoàn tất</p>
+                </div>
+            </div>
+
+            <!-- Order Info -->
+            <div class="order-info">
+                <div class="order-info-row">
+                    <span class="label">Mã đơn hàng:</span>
+                    <span class="value highlight" id="orderCode">ORD-12345</span>
+                </div>
+                <div class="order-info-row">
+                    <span class="label">Ngày đặt:</span>
+                    <span class="value" id="orderDate">09/12/2024</span>
+                </div>
+                <div class="order-info-row">
+                    <span class="label">Tổng tiền:</span>
+                    <span class="value highlight" id="orderTotal">0₫</span>
+                </div>
+                <div class="order-info-row">
+                    <span class="label">Phương thức thanh toán:</span>
+                    <span class="value">Thanh toán khi nhận hàng</span>
+                </div>
+                <div class="order-info-row">
+                    <span class="label">Trạng thái:</span>
+                    <span class="value" style="color: #3ad29f;">Đang xử lý</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Về trang chủ
+                </a>
+                <a href="product_nike.html" class="btn btn-primary">
+                    <i class="fas fa-shopping-bag"></i> Tiếp tục mua hàng
+                </a>
+            </div>
+
+            <!-- Features -->
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-truck"></i>
+                    <p>Giao hàng nhanh chóng</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <p>Thanh toán an toàn</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-headset"></i>
+                    <p>Hỗ trợ 24/7</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/user-profile.js"></script>
+    <script>
+        // Display order info from localStorage or generate
+        document.addEventListener('DOMContentLoaded', () => {
+            // Generate order code
+            const orderCode = 'ORD-' + Date.now().toString().slice(-8);
+            document.getElementById('orderCode').textContent = orderCode;
+
+            // Set order date
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('vi-VN');
+            document.getElementById('orderDate').textContent = dateStr;
+
+            // Get total from checkout (if stored)
+            const checkoutTotal = localStorage.getItem('checkoutTotal');
+            if (checkoutTotal) {
+                document.getElementById('orderTotal').textContent = 
+                    parseInt(checkoutTotal).toLocaleString() + '₫';
+                localStorage.removeItem('checkoutTotal');
+            }
+
+            // Update cart badge
+            if (typeof updateCartBadge === 'function') {
+                updateCartBadge();
+            }
+
+            // Confetti effect
+            setTimeout(() => {
+                console.log('🎊 Order completed successfully!');
+            }, 500);
+        });
+    </script>
+</body>
+</html>
