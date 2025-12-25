@@ -1,4 +1,4 @@
-// user-profile.js - Quản lý hiển thị thông tin user
+
 const API_URL = 'http://localhost:3000';
 
 let currentUser = null;

@@ -1,6 +1,4 @@
-// search-cart.js
 
-// DOM elements will be defined after document loads
 let searchToggle, searchBox, searchInput, searchResults;
 let cartBtn, cartBadge;
 
@@ -326,7 +324,7 @@ async function handleCheckout() {
     }
 }
 
-// Initialize when DOM is ready
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('[Search-Cart] Initializing...');
     
@@ -335,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Search
+  
     searchToggle.addEventListener('click', () => {
         if (searchBox.style.display === 'none' || !searchBox.style.display) {
             searchBox.style.display = 'inline-block';
@@ -355,7 +353,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Cart
     ensureCartDrawer();
     if (cartBtn) {
         cartBtn.addEventListener('click', () => {
@@ -376,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('[Search-Cart] Initialized successfully');
 });
 
-// Periodic badge update
+
 setInterval(() => {
     updateCartBadge();
 }, 3000);

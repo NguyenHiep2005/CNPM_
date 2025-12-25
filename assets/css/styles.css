@@ -206,6 +206,10 @@
 .product-card:hover {
     transform: scale(1.05);
     cursor: pointer;
+    
+   
+    border-bottom: 2px solid rgba(0,0,0,1);
+    
 }
 .product-card:hover .product-name{
     color: red;
@@ -214,7 +218,8 @@
 
 .product-img {
     width: 100%;
-    height: 90%;             
+    height: auto;  /* Thay vì 90% */
+    max-height: 300px; /* Tùy chọn: giới hạn chiều cao tối đa */
     object-fit: contain;
     display: block;
     background: transparent;
@@ -226,6 +231,7 @@
     margin-bottom: 10px;
     color: #333;
     padding: 15px;
+    
 }
 
 .price-old {

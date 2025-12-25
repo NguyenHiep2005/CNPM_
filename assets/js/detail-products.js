@@ -1,5 +1,5 @@
 
-// DOM elements
+
 
 let pImg, pName, pPriceOld, pPriceNew, pDesc, discountBadge, discountPercent;
 let colorButtons, sizeButtons, qtyInput, minusBtn, plusBtn, buyBtn, addCartBtn;
@@ -262,7 +262,7 @@ function setupBuyNow() {
             return;
         }
 
-        // Check login status using new system
+        
         const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
         const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
@@ -274,7 +274,7 @@ function setupBuyNow() {
         }
 
         try {
-            // Add item to cart
+            
             const cartItem = {
                 userId: currentUser.id,
                 productId: currentProduct.id,
@@ -293,7 +293,7 @@ function setupBuyNow() {
             });
 
             if (response.ok) {
-                // Redirect to checkout
+                
                 window.location.href = 'checkout.html';
             } else {
                 alert('Lỗi khi thêm vào giỏ hàng');

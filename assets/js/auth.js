@@ -1,4 +1,4 @@
-// auth.js - Gerenciador de autenticação global
+
 
 class AuthManager {
     constructor() {
@@ -6,13 +6,13 @@ class AuthManager {
         this.currentUser = this.loadUser();
     }
     
-    // Carregar usuário do localStorage
+    
     loadUser() {
         const userData = localStorage.getItem('currentUser');
         return userData ? JSON.parse(userData) : null;
     }
     
-    // Verificar se está logado
+    
     isLoggedIn() {
         return localStorage.getItem('isLoggedIn') === 'true' && this.currentUser !== null;
     }
@@ -24,13 +24,13 @@ class AuthManager {
             const users = await response.json();
             
             if (users.length === 0) {
-                return { success: false, message: 'Email não encontrado' };
+                return { success: false, message: 'Email NOT' };
             }
             
             const user = users[0];
             
             if (user.password !== password) {
-                return { success: false, message: 'Senha incorreta' };
+                return { success: false, message: 'Password incorrect' };
             }
             
             const userData = {
@@ -46,9 +46,9 @@ class AuthManager {
             localStorage.setItem('currentUser', JSON.stringify(userData));
             localStorage.setItem('isLoggedIn', 'true');
             
-            return { success: true, message: 'Login realizado com sucesso', user: userData };
+            return { success: true, message: 'Login successful', user: userData };
         } catch (error) {
-            return { success: false, message: 'Erro ao conectar: ' + error.message };
+            return { success: false, message: 'Errors ' + error.message };
         }
     }
     
@@ -60,26 +60,26 @@ class AuthManager {
         window.location.href = 'index.html';
     }
     
-    // Registrar novo usuário
+   
     async register(userData) {
         try {
-            // Verificar se email já existe
+            
             const existingEmail = await fetch(`${this.API_URL}/users?email=${userData.email}`);
             const users = await existingEmail.json();
             
             if (users.length > 0) {
-                return { success: false, message: 'Email já cadastrado' };
+                return { success: false, message: 'Email ' };
             }
             
-            // Verificar se username já existe
+            
             const existingUsername = await fetch(`${this.API_URL}/users?username=${userData.username}`);
             const usernameUsers = await existingUsername.json();
             
             if (usernameUsers.length > 0) {
-                return { success: false, message: 'Nome de usuário já existe' };
+                return { success: false, message: 'Username already exists' };
             }
             
-            // Criar novo usuário
+           
             const newUser = {
                 email: userData.email,
                 username: userData.username,
@@ -99,14 +99,14 @@ class AuthManager {
             });
             
             if (!response.ok) {
-                throw new Error('Erro ao criar usuário');
+                throw new Error('Failed to register user');
             }
             
             const createdUser = await response.json();
             
             return { 
                 success: true, 
-                message: 'Usuário registrado com sucesso',
+                message: 'User registered successfully',
                 user: createdUser 
             };
         } catch (error) {
@@ -114,18 +114,18 @@ class AuthManager {
         }
     }
     
-    // Obter perfil do usuário
+   
     async getUserProfile(userId) {
         try {
             const response = await fetch(`${this.API_URL}/users/${userId}`);
-            if (!response.ok) throw new Error('Usuário não encontrado');
+            if (!response.ok) throw new Error('');
             return await response.json();
         } catch (error) {
             return null;
         }
     }
     
-    // Atualizar perfil do usuário
+    
     async updateUserProfile(userId, updates) {
         try {
             const response = await fetch(`${this.API_URL}/users/${userId}`, {
@@ -136,7 +136,7 @@ class AuthManager {
                 body: JSON.stringify(updates)
             });
             
-            if (!response.ok) throw new Error('Erro ao atualizar perfil');
+            if (!response.ok) throw new Error('Failed to update profile');
             
             const updatedUser = await response.json();
             this.currentUser = updatedUser;
@@ -149,5 +149,5 @@ class AuthManager {
     }
 }
 
-// Instância global
+
 const auth = new AuthManager();

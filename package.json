@@ -7,12 +7,17 @@
     "server": "json-server --watch db.json --port 3000",
     "dev": "concurrently \"npm run server\" \"live-server\""
   },
-  "keywords": ["ecommerce", "shoes", "nike", "adidas"],
+  "keywords": [
+    "ecommerce",
+    "shoes",
+    "nike",
+    "adidas"
+  ],
   "author": "CloudySport",
   "license": "MIT",
   "devDependencies": {
-    "json-server": "^0.17.3",
-    "live-server": "^1.2.2",
-    "concurrently": "^7.6.0"
+    "concurrently": "^7.6.0",
+    "json-server": "^0.17.4",
+    "live-server": "^1.2.2"
   }
 }

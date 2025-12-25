@@ -215,7 +215,7 @@ async function createOrder(formData) {
     try {
         console.log('[Checkout] Creating order...');
         
-        // Get cart items
+        // cart items
         const cartResponse = await fetch(`http://localhost:3000/cart?userId=${currentUser.id}`);
         const cartItems = await cartResponse.json();
 
@@ -235,7 +235,7 @@ async function createOrder(formData) {
             productMap[p.id] = p;
         });
 
-        // Merge cart items với product info
+      
         const itemsWithDetails = cartItems.map(item => {
             const product = productMap[item.productId];
             return {
@@ -249,7 +249,7 @@ async function createOrder(formData) {
             };
         });
 
-        // Create order object
+      
         const order = {
             userId: currentUser.id,
             orderDate: new Date().toISOString(),
@@ -298,12 +298,12 @@ async function createOrder(formData) {
         } catch (error) {
             console.error('[Checkout] Error clearing cart:', error);
         }
-        // Trong hàm createOrder, trước khi redirect:
+        
         localStorage.setItem('checkoutTotal', window.checkoutTotal.total);
 
-        // Redirect to success page
+       
         window.location.href = 'order-succes.html';
-        // Redirect to success page
+        
         showAlert('✓ Đặt hàng thành công!', 'success');
         setTimeout(() => {
             window.location.href = 'order-succes.html';
@@ -315,7 +315,7 @@ async function createOrder(formData) {
     }
 }
 
-// Show alert message
+
 function showAlert(message, type) {
     const alertEl = document.getElementById('alertMessage');
     if (!alertEl) {

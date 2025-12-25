@@ -28,8 +28,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     const phone = document.getElementById('phone').value.trim();
     const address = document.getElementById('address').value.trim();
     const agree = document.getElementById('agree').checked;
-    
-    // Validate
+
     const errors = validateRegisterForm(fullname, username, email, password, confirmPassword, phone, address, agree);
     
     if (Object.keys(errors).length > 0) {
@@ -56,11 +55,12 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
         
         // Reset form sau 3 giây 
         setTimeout(() => {
-                window.location.href = 'index.html';
-        }, 1500);
+            window.location.href = './login.js';
+        }, 3000);
     } else {
         displayErrors({ general: result.message });
     }
+    
 });
 
 // Validate form
@@ -162,7 +162,8 @@ async function performRegister(fullname, username, email, password, phone, addre
             fullname: fullname,
             phone: phone || '',
             address: address || '',
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            role: 'customer'
         };
         
         console.log('[Register] Creating new user:', newUser);

@@ -1,7 +1,7 @@
-// login.js - Xử lý đăng nhập
+
 const API_URL = 'http://localhost:3000';
 
-// Toggle mật khẩu
+
 function togglePassword() {
     const passwordInput = document.getElementById('password');
     const toggleIcon = document.querySelector('.toggle-password');
@@ -48,7 +48,8 @@ async function performLogin(email, password) {
             username: user.username,
             fullname: user.fullname,
             phone: user.phone || '',
-            address: user.address || ''
+            address: user.address || '',
+            role: user.role || 'customer'
         };
         
         localStorage.setItem('currentUser', JSON.stringify(userData));
@@ -62,7 +63,7 @@ async function performLogin(email, password) {
     }
 }
 
-// Validate form
+
 function validateLoginForm(email, password) {
     const errors = {};
     
@@ -113,43 +114,46 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('password').value;
         const loginBtn = document.querySelector('.login-btn');
         
-        // Validate
+        
         const errors = validateLoginForm(email, password);
         if (Object.keys(errors).length > 0) {
             displayErrors(errors);
             return;
         }
         
-        // Clear errors
+        
         displayErrors({});
         
-        // Show loading
+       
         loginBtn.disabled = true;
         loginBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang đăng nhập...';
         
-        // Perform login
+       
         const result = await performLogin(email, password);
         
         if (result.success) {
-            // Success - show success message
+            
             loginBtn.innerHTML = '<i class="fa-solid fa-check"></i> Đăng nhập thành công!';
             loginBtn.style.background = '#3ad29f';
             
             console.log('✓ Đăng nhập thành công:', result.user.fullname);
             
-            // Redirect to home after 1.5 seconds
+           
             setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1500);
+                if(result.user.role == 'admin'){
+                    window.location.href = 'admin.html';
+                }
+                else window.location.href = 'index.html';
+            }, 2000);
         } else {
-            // Error - show error and reset button
+            
             displayErrors({
                 password: result.message
             });
             
             loginBtn.disabled = false;
             loginBtn.innerHTML = 'Đăng Nhập';
-            
+            loginBtn.style.background = '' 
             console.error('✗ Lỗi đăng nhập:', result.message);
         }
     });
@@ -162,7 +166,6 @@ window.addEventListener('load', () => {
     
     if (isLoggedIn && currentUser) {
         console.log('Người dùng đã đăng nhập, tự động chuyển về trang chủ');
-        // Bỏ comment nếu muốn tự động redirect
-        // window.location.href = 'index.html';
+        
     }
 });

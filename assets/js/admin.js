@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000';
+// const API_URL = 'http://localhost:3000';
+const API_URL = auth.API_URL || 'http://localhost:3000';
 let currentUser = null;
 let currentEditingProduct = null;
 let currentSection = 'dashboard';
@@ -6,76 +7,75 @@ let isSubmittingProduct = false;
 // ============ INITIALIZATION ============
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('[Admin] Dashboard loading');
-    
+    if(!auth.isLoggedIn()){
+        alert('Vui lòng đăng nhập để truy cập!');
+        window.location.href = "../../login.html";
+        return;
+    }    
     // Check admin access
-    let userData = localStorage.getItem('currentUser');
-    let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    
-    // Nếu chưa đăng nhập, tự động set admin user (cho development)
-    if (!userData || !isLoggedIn) {
-        try {
-            // Fetch admin user từ API
-            const response = await fetch(`${API_URL}/users?username=admin`);
-            const users = await response.json();
-            
-            if (users.length > 0) {
-                const adminUser = users[0];
-                currentUser = {
-                    id: adminUser.id,
-                    username: adminUser.username,
-                    email: adminUser.email,
-                    fullname: adminUser.fullname,
-                    phone: adminUser.phone,
-                    address: adminUser.address
-                };
-                
-                // Lưu vào localStorage
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                localStorage.setItem('isLoggedIn', 'true');
-                
-                console.log('[Admin] Admin user loaded from API');
-            } else {
-                throw new Error('Admin user not found');
-            }
-        } catch (error) {
-            console.error('[Admin] Error:', error);
-            // Fallback: chuyển hướng tới login
-            alert('Cần đăng nhập trước. Vui lòng đăng nhập với tài khoản admin.');
-            window.location.href = 'login.html';
+    try {
+        // 2. LẤY THÔNG TIN ROLE TỪ SERVER
+        // Vì auth.js hiện tại không lưu 'role' vào localStorage khi login,
+        // ta cần fetch lại profile đầy đủ để chắc chắn.
+        const userId = auth.currentUser.id;
+        const fullProfile = await auth.getUserProfile(userId);
+
+        if (!fullProfile) {
+            throw new Error('Không tìm thấy thông tin người dùng');
+        }
+
+        // 3. CHECK QUYỀN ADMIN
+        if (fullProfile.role !== 'admin') {
+            alert('Bạn không có quyền truy cập trang quản trị!');
+            window.location.href = 'index.html'; // Đá về trang chủ
             return;
         }
-    } else {
-        currentUser = JSON.parse(userData);
-    }
-    
-    // Check if admin
-    if (currentUser.username !== 'admin') {
-        alert('Bạn không có quyền truy cập trang này');
-        window.location.href = 'index.html';
-        return;
-    }
-    
-    // Display admin info
-    document.getElementById('adminUsername').textContent = `Admin: ${currentUser.fullname}`;
-    
-    // Update time
-    updateTime();
-    setInterval(updateTime, 1000);
-    
-    // Load initial data
-    loadDashboardData();
-    
-    // Setup menu items
-    document.querySelectorAll('.menu-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.preventDefault();
-            switchSection(item.dataset.section);
+
+        // Gán user đã verify vào biến global
+        currentUser = fullProfile;
+        console.log('[Admin] Welcome:', currentUser.fullname);
+
+        // 4. HIỂN THỊ GIAO DIỆN
+        const adminNameElement = document.getElementById('adminUsername');
+        if(adminNameElement) {
+            adminNameElement.textContent = `Admin: ${currentUser.fullname}`;
+        }
+        
+        // Update time
+        updateTime();
+        setInterval(updateTime, 1000);
+        
+        // Load initial data
+        loadDashboardData();
+        
+        // Setup menu items
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchSection(item.dataset.section);
+            });
         });
-    });
-    
-    // Setup product form
-    document.getElementById('productForm').addEventListener('submit', handleProductSubmit);
+        
+        // Setup product form
+        const productForm = document.getElementById('productForm');
+        if(productForm) {
+            productForm.addEventListener('submit', handleProductSubmit);
+        }
+
+    } catch (error) {
+        console.error('[Admin] Auth Error:', error);
+        alert('Lỗi xác thực quyền hạn. Vui lòng đăng nhập lại.');
+        auth.logout(); // Logout nếu có lỗi lạ
+    }
 });
+
+// ============ LOGOUT (Sử dụng auth.js) ============
+function logout() {
+    if (confirm('Bạn chắc chắn muốn đăng xuất?')) {
+        auth.logout(); // Gọi hàm logout từ class AuthManager
+        // Hàm này trong auth.js đã bao gồm xóa localStorage và redirect
+    }
+}
 
 // ============ UPDATE TIME ============
 function updateTime() {
@@ -89,7 +89,7 @@ function updateTime() {
 function switchSection(sectionName) {
     console.log('[Admin] Switching to:', sectionName);
     
-    currentSection = sectionName; // ✅ Lưu section hiện tại
+    currentSection = sectionName; 
     
     // Hide all sections
     document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
@@ -137,8 +137,9 @@ function showAlert(message, type = 'success') {
 }
 
 // ============ LOAD DASHBOARD DATA ============
-async function loadDashboardData() {
+async function loadDashboardData(e) {
     try {
+        if(e) e.preventDefault();
         const [productsRes, usersRes, ordersRes] = await Promise.all([
             fetch(`${API_URL}/products`),
             fetch(`${API_URL}/users`),
@@ -174,8 +175,10 @@ async function loadDashboardData() {
 }
 
 // ============ PRODUCTS MANAGEMENT ============
-async function loadProducts() {
+async function loadProducts(e) {
+    if(e) e.preventDefault();
     try {
+        
         console.log('[Admin] Loading products...');
         const response = await fetch(`${API_URL}/products`);
         const products = await response.json();
@@ -200,11 +203,11 @@ async function loadProducts() {
         
         // ✅ Gắn event listeners SAU khi render HTML
         tbody.querySelectorAll('.btn-edit').forEach(btn => {
-            btn.addEventListener('click', () => editProduct(btn.dataset.id));
+            btn.addEventListener('click', (e) => editProduct(btn.dataset.id, e));
         });
         
         tbody.querySelectorAll('.btn-delete').forEach(btn => {
-            btn.addEventListener('click', () => deleteProduct(btn.dataset.id));
+            btn.addEventListener('click', (e) => deleteProduct(btn.dataset.id, e));
         });
         
         console.log('[Admin] Products loaded:', products.length);
@@ -215,7 +218,8 @@ async function loadProducts() {
 }
 
 // ============ PRODUCT MANAGEMENT ============
-function openProductModal() {
+function openProductModal(e) {
+    if(e) e.preventDefault();
     console.log('[Admin] Opening product modal for add');
     
     const modal = document.getElementById('productModal');
@@ -228,7 +232,8 @@ function openProductModal() {
     modal.classList.add('active');
 }
 
-async function editProduct(productId) {
+async function editProduct(productId,e) {
+    if(e) e.preventDefault();
     console.log('[Admin] Editing product:', productId);
     try {
         const response = await fetch(`${API_URL}/products/${productId}`);
@@ -258,7 +263,7 @@ async function editProduct(productId) {
         }
     } catch (error) {
         console.error('[Admin] Error loading product:', error);
-        showAlert('❌ Lỗi tải sản phẩm: ' + error.message, 'error');
+        showAlert(' Lỗi tải sản phẩm: ' + error.message, 'error');
     }
 }
 
@@ -272,9 +277,13 @@ function closeProductModal() {
 }
 
 async function handleProductSubmit(e) {
-    e.preventDefault();
+    if(e) {
+        e.preventDefault();
+        e.stopPropagation(); // Ngăn sự kiện lan ra ngoài
+        e.stopImmediatePropagation();
+    }
     
-    // ✅ LOCK - Ngăn double submit
+    
     if (isSubmittingProduct) {
         console.warn('[Admin] Already submitting, ignoring duplicate request');
         return;
@@ -307,7 +316,7 @@ async function handleProductSubmit(e) {
     };
     
     try {
-        // ✅ KIỂM TRA TRÙNG LẶP - CHỈ khi thêm mới (không sửa)
+      
         if (!currentEditingProduct) {
             console.log('[Admin] Checking for duplicate products...');
             const productsRes = await fetch(`${API_URL}/products`);
@@ -330,7 +339,7 @@ async function handleProductSubmit(e) {
         let response;
         
         if (currentEditingProduct) {
-            // ✅ CẬP NHẬT
+           
             console.log('[Admin] Updating product:', currentEditingProduct);
             response = await fetch(`${API_URL}/products/${currentEditingProduct}`, {
                 method: 'PUT',
@@ -338,7 +347,7 @@ async function handleProductSubmit(e) {
                 body: JSON.stringify(productData)
             });
         } else {
-            // ✅ THÊM MỚI
+           
             console.log('[Admin] Creating new product');
             response = await fetch(`${API_URL}/products`, {
                 method: 'POST',
@@ -354,14 +363,14 @@ async function handleProductSubmit(e) {
             closeProductModal();
             loadProducts();
         } else {
-            showAlert('❌ Lỗi: ' + response.statusText, 'error');
+            showAlert(' Lỗi: ' + response.statusText, 'error');
             submitBtn.disabled = false;
             submitBtn.textContent = originalBtnText;
         }
         
     } catch (error) {
         console.error('[Admin] Error:', error);
-        showAlert('❌ Lỗi: ' + error.message, 'error');
+        showAlert(' Lỗi: ' + error.message, 'error');
         submitBtn.disabled = false;
         submitBtn.textContent = originalBtnText;
     } finally {
@@ -369,7 +378,8 @@ async function handleProductSubmit(e) {
     }
 }
 
-async function deleteProduct(productId) {
+async function deleteProduct(productId,e) {
+    if(e) e.preventDefault();
     if (!confirm('Bạn chắc chắn muốn xóa sản phẩm này?')) {
         return;
     }
@@ -385,12 +395,12 @@ async function deleteProduct(productId) {
             loadProducts();
             console.log('[Admin] Product deleted successfully');
         } else {
-            showAlert('❌ Lỗi xóa: ' + response.statusText, 'error');
+            showAlert(' Lỗi xóa: ' + response.statusText, 'error');
         }
         
     } catch (error) {
         console.error('[Admin] Error:', error);
-        showAlert('❌ Lỗi xóa sản phẩm: ' + error.message, 'error');
+        showAlert(' Lỗi xóa sản phẩm: ' + error.message, 'error');
     }
 }
 
@@ -412,7 +422,7 @@ async function loadUsers() {
                 <td>${user.email}</td>
                 <td>${user.fullname || 'N/A'}</td>
                 <td>
-                    <button class="btn btn-danger" onclick="deleteUser(${user.id})">Xóa</button>
+                    ${user.role !== 'admin' ? `<button class="btn btn-danger" onclick="deleteUser(${user.id},event)">Xóa</button>` : ''}
                 </td>
             `;
             tbody.appendChild(row);
@@ -425,7 +435,8 @@ async function loadUsers() {
     }
 }
 
-async function deleteUser(userId) {
+async function deleteUser(userId,e) {
+    if(e) e.preventDefault();
     if (!confirm('Bạn chắc chắn muốn xóa tài khoản này?')) {
         return;
     }
@@ -438,7 +449,7 @@ async function deleteUser(userId) {
         
         if (response.ok) {
             showAlert('✓ Xóa tài khoản thành công', 'success');
-            loadUsers(); // ✅ Chỉ reload users, không đổi tab
+            loadUsers(); // 
             // loadDashboardData(); // Bỏ dòng này hoặc gọi bên dưới
         }
         
@@ -605,14 +616,14 @@ async function updateOrderStatus(orderId, newStatus) {
     try {
         console.log('[Admin] Updating order status:', orderId, newStatus);
         
-        // Fetch current order to get all data
+        
         const orderRes = await fetch(`${API_URL}/orders/${orderId}`);
         const order = await orderRes.json();
         
-        // Update status
+        
         order.status = newStatus;
         
-        // Mark order as completed if delivered
+       
         if (newStatus === 'delivered') {
             order.completedAt = new Date().toISOString();
         }
@@ -636,7 +647,7 @@ async function updateOrderStatus(orderId, newStatus) {
             
             // Reload orders, không đổi tab
             loadOrders(); // Chỉ reload orders, không đổi tab
-            // loadDashboardData(); // Bỏ dòng này hoặc gọi bên dưới
+           
         }
         
     } catch (error) {
@@ -645,7 +656,7 @@ async function updateOrderStatus(orderId, newStatus) {
     }
 }
 
-// ============ STATISTICS ============
+//  STATISTICS
 async function updateStatistics() {
     try {
         const statType = document.querySelector('input[name="statType"]:checked').value;

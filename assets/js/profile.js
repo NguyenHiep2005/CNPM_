@@ -39,14 +39,14 @@ function loadUserInfo() {
     }
 }
 
-// ✅ Helper function định dạng ngày và giờ
+// = định dạng ngày và giờ
 function formatOrderDateTime(dateStr) {
     if (!dateStr) return 'N/A';
     
     try {
         const date = new Date(dateStr);
         
-        // Định dạng: "12/01/2024 14:30"
+        // Định dạng: "12/01/2025 14:30"
         const options = {
             day: '2-digit',
             month: '2-digit',
@@ -63,7 +63,7 @@ function formatOrderDateTime(dateStr) {
     }
 }
 
-// ✅ Helper function tính thời gian từ bây giờ (VD: "2 ngày trước")
+// = tính thời gian đã trôi qua từ ngày đặt hàng đến hiện tại
 function getTimeAgo(dateStr) {
     if (!dateStr) return '';
     
@@ -98,7 +98,7 @@ async function loadOrders() {
     }
     
     try {
-        // Fetch products
+        
         console.log('[Profile] Fetching products...');
         const productsResponse = await fetch('http://localhost:3000/products');
         let allProducts = await productsResponse.json();
@@ -108,7 +108,7 @@ async function loadOrders() {
         });
         console.log('[Profile] Products map created with', Object.keys(productMap).length, 'products');
         
-        // Fetch orders
+        
         console.log('[Profile] Fetching all orders...');
         const ordersResponse = await fetch('http://localhost:3000/orders');
         
@@ -120,12 +120,12 @@ async function loadOrders() {
         console.log('[Profile] Total orders from API:', allOrders.length);
         console.log('[Profile] All orders:', allOrders);
         
-        // Log each order to see if userId exists
+       
         allOrders.forEach((order, idx) => {
             console.log(`[Profile] Order ${idx}: id=${order.id}, userId=${order.userId}, status=${order.status}`);
         });
         
-        // Enrich orders with product info
+        
         allOrders = allOrders.map(order => {
             if (order.items && order.items.length > 0) {
                 order.items = order.items.map(item => {
@@ -146,7 +146,7 @@ async function loadOrders() {
         allOrdersCache = allOrders;
         console.log('[Profile] Orders enriched with product info');
         
-        // Filter by currentUser
+        
         let userOrders = [];
         
         if (currentUser && currentUser.id) {
@@ -157,9 +157,9 @@ async function loadOrders() {
                 const matches = orderUserId === currentUserId;
                 
                 if (!matches) {
-                    console.log(`[Profile] ❌ Order ${order.id}: '${orderUserId}' !== '${currentUserId}'`);
+                    console.log(`[Profile]  Order ${order.id}: '${orderUserId}' !== '${currentUserId}'`);
                 } else {
-                    console.log(`[Profile] ✅ Order ${order.id}: '${orderUserId}' === '${currentUserId}'`);
+                    console.log(`[Profile]  Order ${order.id}: '${orderUserId}' === '${currentUserId}'`);
                 }
                 
                 return matches;
@@ -215,7 +215,7 @@ function displayOrders(orders) {
         const statusClass = order.status || 'pending';
         const total = order.totalAmount || order.total || 0;
         
-        // ✅ Hiển thị thời gian chi tiết + "X ngày trước"
+        // Hiển thị thời gian chi tiết
         const timeDisplay = timeAgo ? `${orderDate} (${timeAgo})` : orderDate;
         
         html += `
@@ -323,7 +323,7 @@ function showOrderModal(order) {
         `;
     }
     
-    // ✅ Hiển thị thời gian chi tiết trong modal
+    //Hiển thị thời gian chi tiết trong modal
     const html = `
         <div class="modal-header">
             <h2>Chi tiết đơn hàng #${order.id}</h2>

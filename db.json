@@ -8,7 +8,8 @@
       "fullname": "Nguyễn Hoàng Hiệp",
       "phone": "0987654321",
       "address": "123 Đường Lê Trọng Tấn, Hà Nội",
-      "createdAt": "2025-01-01T10:00:00Z"
+      "createdAt": "2025-01-01T10:00:00Z",
+      "role": "customer"
     },
     {
       "id": 2,
@@ -18,27 +19,19 @@
       "fullname": "Admin CloudySport",
       "phone": "0123456789",
       "address": "321 Nguyễn Xiển, Hà Nội",
-      "createdAt": "2025-01-01T10:00:00Z"
+      "createdAt": "2025-01-01T10:00:00Z",
+      "role": "admin"
     },
     {
-      "email": "nguyenhoanqhiep2k5@gmail.com",
-      "username": "hiepnguyen2005",
-      "password": "1512005",
-      "fullname": "ca mam",
-      "phone": "0983149710",
-      "address": "Hà Nam",
-      "createdAt": "2025-12-11T10:44:23.956Z",
+      "email": "thangvip@gmail.com",
+      "username": "thangvip",
+      "password": "123456",
+      "fullname": "Ngô Quyết Thắng",
+      "phone": "",
+      "address": "",
+      "createdAt": "2025-12-22T16:20:27.420Z",
+      "role": "customer",
       "id": 3
-    },
-    {
-      "email": "lo100nam@gmail.com",
-      "username": "lo100nam",
-      "password": "lo100nam",
-      "fullname": "lo100nam",
-      "phone": "0983149710",
-      "address": "Giải phóng",
-      "createdAt": "2025-12-11T11:23:34.394Z",
-      "id": 4
     }
   ],
   "products": [
@@ -46,7 +39,7 @@
       "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
       "price": 850000,
       "finalPrice": 450000,
-      "stock": 40,
+      "stock": 10,
       "image": "./assets/img/mau1.jpg",
       "description": "Giày Nike Air Force 1 chính hãng, thiết kế cổ điển, đế êm ái",
       "brand": "NIKE",
@@ -69,31 +62,6 @@
       ],
       "discount": 47,
       "id": "prod1"
-    },
-    {
-      "id": "prod2",
-      "name": "NEW BALANCE / MẪU 2",
-      "brand": "NEW BALANCE",
-      "price": 800000,
-      "discount": 35,
-      "finalPrice": 520000,
-      "image": "./assets/img/mau2.jpg",
-      "description": "Giày New Balance chất lượng cao, phong cách casual",
-      "size": [
-        36,
-        37,
-        38,
-        39,
-        40,
-        41,
-        42
-      ],
-      "color": [
-        "White"
-      ],
-      "stock": 35,
-      "rating": 4.3,
-      "reviews": 85
     },
     {
       "id": "prod3",
@@ -302,20 +270,14 @@
       "id": "-Qn8VSp"
     },
     {
-      "name": "catta",
-      "price": 1000000,
-      "finalPrice": 200000,
-      "stock": 32,
-      "image": "./assets/img/mau4.jpg",
-      "description": "haha",
-      "brand": "NIKE",
-      "rating": 4.5,
-      "reviews": 0,
-      "color": [
-        "White",
-        "Black",
-        "Red"
-      ],
+      "id": "prod11",
+      "name": "Adidas Ultraboost 22",
+      "brand": "ADIDAS",
+      "price": 950000,
+      "discount": 35,
+      "finalPrice": 617500,
+      "image": "./assets/img/adidas1.jpg",
+      "description": "Giày chạy bộ Adidas Ultraboost 22 với công nghệ Boost, êm ái và đàn hồi",
       "size": [
         36,
         37,
@@ -326,8 +288,448 @@
         42,
         43
       ],
-      "discount": 80,
-      "id": "gVDv6K3"
+      "color": [
+        "White",
+        "Black",
+        "Blue"
+      ],
+      "stock": 45,
+      "rating": 4.8,
+      "reviews": 230
+    },
+    {
+      "id": "prod12",
+      "name": "Adidas Superstar Classic",
+      "brand": "ADIDAS",
+      "price": 780000,
+      "discount": 40,
+      "finalPrice": 468000,
+      "image": "./assets/img/adidas2.jpg",
+      "description": "Adidas Superstar huyền thoại với thiết kế vỏ sò iconic, phong cách streetwear",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "White",
+        "Black"
+      ],
+      "stock": 50,
+      "rating": 4.7,
+      "reviews": 310
+    },
+    {
+      "id": "prod13",
+      "name": "Adidas Stan Smith",
+      "brand": "ADIDAS",
+      "price": 820000,
+      "discount": 30,
+      "finalPrice": 574000,
+      "image": "./assets/img/adidas3.jpg",
+      "description": "Giày tennis Adidas Stan Smith cổ điển, thiết kế tối giản sang trọng",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "color": [
+        "White",
+        "Green"
+      ],
+      "stock": 60,
+      "rating": 4.6,
+      "reviews": 280
+    },
+    {
+      "id": "prod14",
+      "name": "Adidas NMD R1",
+      "brand": "ADIDAS",
+      "price": 890000,
+      "discount": 25,
+      "finalPrice": 667500,
+      "image": "./assets/img/adidas4.jpg",
+      "description": "Adidas NMD R1 kết hợp phong cách thời trang và công nghệ Boost tiên tiến",
+      "size": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "Black",
+        "Red",
+        "Blue"
+      ],
+      "stock": 40,
+      "rating": 4.7,
+      "reviews": 195
+    },
+    {
+      "id": "prod15",
+      "name": "Adidas Yeezy Boost 350 V2",
+      "brand": "ADIDAS",
+      "price": 1200000,
+      "discount": 20,
+      "finalPrice": 960000,
+      "image": "./assets/img/adidas5.jpg",
+      "description": "Adidas Yeezy Boost 350 V2 phiên bản rep 1:1, thiết kế độc đáo từ Kanye West",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "Gray",
+        "Black",
+        "White"
+      ],
+      "stock": 30,
+      "rating": 4.9,
+      "reviews": 420
+    },
+    {
+      "id": "prod16",
+      "name": "Adidas Gazelle",
+      "brand": "ADIDAS",
+      "price": 750000,
+      "discount": 35,
+      "finalPrice": 487500,
+      "image": "./assets/img/adidas6.jpg",
+      "description": "Adidas Gazelle vintage style, da lộn cao cấp phong cách retro",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "color": [
+        "Blue",
+        "Red",
+        "Black"
+      ],
+      "stock": 55,
+      "rating": 4.5,
+      "reviews": 175
+    },
+    {
+      "id": "prod17",
+      "name": "Adidas Forum Low",
+      "brand": "ADIDAS",
+      "price": 850000,
+      "discount": 30,
+      "finalPrice": 595000,
+      "image": "./assets/img/adidas7.jpg",
+      "description": "Adidas Forum Low basketball style, thiết kế cổ điển từ những năm 80",
+      "size": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "White",
+        "Black",
+        "Blue"
+      ],
+      "stock": 45,
+      "rating": 4.6,
+      "reviews": 160
+    },
+    {
+      "id": "prod18",
+      "name": "Adidas Predator Edge",
+      "brand": "ADIDAS",
+      "price": 980000,
+      "discount": 15,
+      "finalPrice": 833000,
+      "image": "./assets/img/adidas8.jpg",
+      "description": "Giày đá bóng Adidas Predator Edge chuyên nghiệp, kiểm soát bóng tối ưu",
+      "size": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "color": [
+        "Black",
+        "Red",
+        "White"
+      ],
+      "stock": 35,
+      "rating": 4.8,
+      "reviews": 145
+    },
+    {
+      "id": "prod19",
+      "name": "Puma Suede Classic XXI",
+      "brand": "PUMA",
+      "price": 780000,
+      "discount": 35,
+      "finalPrice": 507000,
+      "image": "./assets/img/puma1.jpg",
+      "description": "Puma Suede Classic XXI với da lộn cao cấp, phong cách retro đẳng cấp",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "Black",
+        "Red",
+        "Blue"
+      ],
+      "stock": 50,
+      "rating": 4.7,
+      "reviews": 245
+    },
+    {
+      "id": "prod20",
+      "name": "Puma RS-X³ Puzzle",
+      "brand": "PUMA",
+      "price": 920000,
+      "discount": 30,
+      "finalPrice": 644000,
+      "image": "./assets/img/puma2.jpg",
+      "description": "Puma RS-X³ Puzzle thiết kế chunky sneaker hiện đại, đầy màu sắc",
+      "size": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "Multi",
+        "White",
+        "Black"
+      ],
+      "stock": 40,
+      "rating": 4.6,
+      "reviews": 198
+    },
+    {
+      "id": "prod21",
+      "name": "Puma Cali Sport",
+      "brand": "PUMA",
+      "price": 850000,
+      "discount": 25,
+      "finalPrice": 637500,
+      "image": "./assets/img/puma3.jpg",
+      "description": "Puma Cali Sport phong cách California street style, năng động và trendy",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "color": [
+        "White",
+        "Black",
+        "Pink"
+      ],
+      "stock": 45,
+      "rating": 4.8,
+      "reviews": 312
+    },
+    {
+      "id": "prod22",
+      "name": "Puma Clyde All-Pro",
+      "brand": "PUMA",
+      "price": 980000,
+      "discount": 20,
+      "finalPrice": 784000,
+      "image": "./assets/img/puma4.jpg",
+      "description": "Giày bóng rổ Puma Clyde All-Pro hiệu suất cao, thiết kế huyền thoại",
+      "size": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "color": [
+        "Black",
+        "White",
+        "Red"
+      ],
+      "stock": 35,
+      "rating": 4.7,
+      "reviews": 167
+    },
+    {
+      "id": "prod23",
+      "name": "Puma Future Rider",
+      "brand": "PUMA",
+      "price": 750000,
+      "discount": 40,
+      "finalPrice": 450000,
+      "image": "./assets/img/puma5.jpg",
+      "description": "Puma Future Rider kết hợp phong cách running và lifestyle, nhẹ và thoải mái",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "Gray",
+        "Blue",
+        "Black"
+      ],
+      "stock": 55,
+      "rating": 4.5,
+      "reviews": 189
+    },
+    {
+      "id": "prod24",
+      "name": "Puma Roma Basic",
+      "brand": "PUMA",
+      "price": 680000,
+      "discount": 35,
+      "finalPrice": 442000,
+      "image": "./assets/img/puma6.jpg",
+      "description": "Puma Roma Basic thiết kế cổ điển từ những năm 60, phong cách vượt thời gian",
+      "size": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "color": [
+        "White",
+        "Black"
+      ],
+      "stock": 60,
+      "rating": 4.4,
+      "reviews": 156
+    },
+    {
+      "id": "prod25",
+      "name": "Puma Mayze Classic",
+      "brand": "PUMA",
+      "price": 890000,
+      "discount": 28,
+      "finalPrice": 640800,
+      "image": "./assets/img/puma7.jpg",
+      "description": "Puma Mayze Classic với đế platform độc đáo, tăng chiều cao và phong cách",
+      "size": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "color": [
+        "White",
+        "Black",
+        "Beige"
+      ],
+      "stock": 42,
+      "rating": 4.9,
+      "reviews": 278
+    },
+    {
+      "id": "prod26",
+      "name": "Puma Velocity Nitro 2",
+      "brand": "PUMA",
+      "price": 1050000,
+      "discount": 22,
+      "finalPrice": 819000,
+      "image": "./assets/img/puma8.jpg",
+      "description": "Giày chạy bộ Puma Velocity Nitro 2 với công nghệ Nitro foam, siêu nhẹ và êm",
+      "size": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "color": [
+        "Blue",
+        "Black",
+        "Orange"
+      ],
+      "stock": 38,
+      "rating": 4.8,
+      "reviews": 215
+    },
+    {
+      "id": "prod27",
+      "name": "Puma Thunder Spectra",
+      "brand": "PUMA",
+      "price": 980000,
+      "discount": 30,
+      "finalPrice": 686000,
+      "image": "./assets/img/puma9.jpg",
+      "description": "Puma Thunder Spectra dad shoes style, chunky và đầy cá tính với phối màu bắt mắt",
+      "size": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "color": [
+        "Multi",
+        "Black",
+        "White"
+      ],
+      "stock": 33,
+      "rating": 4.6,
+      "reviews": 192
     }
   ],
   "orders": [
@@ -395,7 +797,7 @@
     {
       "userId": 1,
       "orderDate": "2025-12-10T12:51:22.812Z",
-      "status": "pending",
+      "status": "shipping",
       "shippingInfo": {
         "firstName": "Nguyễn",
         "lastName": "Hoàng Hiệp",
@@ -421,288 +823,7 @@
       ],
       "totalAmount": 679000,
       "id": 3
-    },
-    {
-      "userId": 1,
-      "orderDate": "2025-12-10T12:52:46.235Z",
-      "status": "delivered",
-      "shippingInfo": {
-        "firstName": "Nguyễn",
-        "lastName": "Hoàng Hiệp",
-        "email": "user@example.com",
-        "phone": "0987654321",
-        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
-        "district": "khong yeu em",
-        "city": "Danang",
-        "notes": ""
-      },
-      "shippingMethod": "express",
-      "paymentMethod": "cod",
-      "items": [
-        {
-          "id": "prod2",
-          "name": "NEW BALANCE / MẪU 2",
-          "price": 520000,
-          "image": "./assets/img/mau2.jpg",
-          "size": 38,
-          "color": "Gray",
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 549000,
-      "id": 4,
-      "completedAt": "2025-12-10T15:42:47.671Z"
-    },
-    {
-      "userId": 1,
-      "orderDate": "2025-12-10T13:03:35.780Z",
-      "status": "delivered",
-      "shippingInfo": {
-        "firstName": "Nguyễn",
-        "lastName": "Hoàng Hiệp",
-        "email": "user@example.com",
-        "phone": "0987654321",
-        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
-        "district": "khong yeu em",
-        "city": "Danang",
-        "notes": ""
-      },
-      "shippingMethod": "express",
-      "paymentMethod": "cod",
-      "items": [
-        {
-          "id": "prod2",
-          "name": "NEW BALANCE / MẪU 2",
-          "price": 520000,
-          "image": "./assets/img/mau2.jpg",
-          "size": 36,
-          "color": "Gray",
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 549000,
-      "id": 5,
-      "completedAt": "2025-12-10T15:42:42.722Z"
-    },
-    {
-      "userId": 1,
-      "orderDate": "2025-12-10T13:32:51.785Z",
-      "status": "delivered",
-      "shippingInfo": {
-        "firstName": "Nguyễn",
-        "lastName": "Hoàng Hiệp",
-        "email": "user@example.com",
-        "phone": "0987654321",
-        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
-        "district": "kim chi",
-        "city": "Hanoi",
-        "notes": ""
-      },
-      "shippingMethod": "standard",
-      "paymentMethod": "cod",
-      "items": [
-        {
-          "id": "prod1",
-          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
-          "price": 650000,
-          "image": "./assets/img/mau1.jpg",
-          "size": "37",
-          "color": "White",
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 650000,
-      "id": 6,
-      "completedAt": "2025-12-10T15:42:31.507Z"
-    },
-    {
-      "userId": 1,
-      "orderDate": "2025-12-10T15:45:05.236Z",
-      "status": "delivered",
-      "shippingInfo": {
-        "firstName": "Nguyễn",
-        "lastName": "Hoàng Hiệp",
-        "email": "user@example.com",
-        "phone": "0987654321",
-        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
-        "district": "khong yeu em",
-        "city": "TPHCM",
-        "notes": ""
-      },
-      "shippingMethod": "express",
-      "paymentMethod": "cod",
-      "items": [
-        {
-          "id": "prod1",
-          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
-          "price": 450000,
-          "image": "./assets/img/mau1.jpg",
-          "size": "38",
-          "color": "Black",
-          "quantity": 1
-        },
-        {
-          "id": "prod1",
-          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
-          "price": 450000,
-          "image": "./assets/img/mau1.jpg",
-          "size": "38",
-          "color": "Black",
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 929000,
-      "id": 7,
-      "completedAt": "2025-12-11T10:57:33.273Z"
-    },
-    {
-      "userId": 3,
-      "orderDate": "2025-12-11T08:17:15.244Z",
-      "status": "pending",
-      "shippingInfo": {
-        "firstName": "nguyen",
-        "lastName": "hiep",
-        "email": "htthvip@gmail.com",
-        "phone": "0987654321",
-        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
-        "district": "khong yeu em",
-        "city": "Danang",
-        "notes": ""
-      },
-      "shippingMethod": "standard",
-      "paymentMethod": "cod",
-      "items": [
-        {
-          "id": "prod1",
-          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
-          "price": 750000,
-          "image": "./assets/img/mau1.jpg",
-          "size": 36,
-          "color": "Black",
-          "quantity": 1
-        },
-        {
-          "id": "prod1",
-          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
-          "price": 750000,
-          "image": "./assets/img/mau1.jpg",
-          "size": 36,
-          "color": "Black",
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 1500000,
-      "id": 8
-    },
-    {
-      "userId": 1,
-      "orderDate": "2025-12-11T10:36:52.488Z",
-      "status": "pending",
-      "shippingInfo": {
-        "firstName": "Nguyễn",
-        "lastName": "Hoàng Hiệp",
-        "email": "user@example.com",
-        "phone": "0987654321",
-        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
-        "district": "khong yeu em",
-        "city": "Hanoi",
-        "notes": ""
-      },
-      "shippingMethod": "express",
-      "paymentMethod": "cod",
-      "items": [
-        {
-          "id": "prod1",
-          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
-          "price": 750000,
-          "image": "./assets/img/mau1.jpg",
-          "size": 36,
-          "color": "Black",
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 779000,
-      "id": 9
-    },
-    {
-      "userId": 1,
-      "orderDate": "2025-12-11T10:42:56.616Z",
-      "status": "pending",
-      "shippingInfo": {
-        "firstName": "Nguyễn",
-        "lastName": "Hoàng Hiệp",
-        "email": "user@example.com",
-        "phone": "0987654321",
-        "address": "123 Đường Lê Trọng Tấn, Hà Nội",
-        "district": "khong yeu em",
-        "city": "Danang",
-        "notes": ""
-      },
-      "shippingMethod": "standard",
-      "paymentMethod": "cod",
-      "items": [
-        {
-          "id": "prod3",
-          "name": "Nike Dunk Low Retro Đen Trắng REP 1:1",
-          "price": 550000,
-          "image": "./assets/img/mau3.jpg",
-          "size": 36,
-          "color": "White",
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 550000,
-      "id": 10
-    },
-    {
-      "userId": 3,
-      "orderDate": "2025-12-11T11:00:18.491Z",
-      "status": "delivered",
-      "shippingInfo": {
-        "firstName": "ca",
-        "lastName": "mam",
-        "email": "nguyenhoanqhiep2k5@gmail.com",
-        "phone": "0983149710",
-        "address": "Hà Nam",
-        "district": "quang trung",
-        "city": "Danang",
-        "notes": ""
-      },
-      "shippingMethod": "standard",
-      "paymentMethod": "cod",
-      "items": [
-        {
-          "id": "prod1",
-          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
-          "price": 450000,
-          "image": "./assets/img/mau1.jpg",
-          "size": "38",
-          "color": "Black",
-          "quantity": 1
-        },
-        {
-          "id": "prod1",
-          "name": "NIKE AIR FORCE 1 '07 ESSENTIAL",
-          "price": 450000,
-          "image": "./assets/img/mau1.jpg",
-          "size": 38,
-          "color": "Red",
-          "quantity": 5
-        }
-      ],
-      "totalAmount": 2700000,
-      "id": 11,
-      "completedAt": "2025-12-11T11:20:49.743Z"
     }
   ],
-  "cart": [
-    {
-      "userId": 3,
-      "productId": "prod1",
-      "quantity": 1,
-      "selectedSize": "38",
-      "selectedColor": "White",
-      "id": 1
-    }
-  ]
+  "cart": []
 }

@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Sale - CloudySport</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/font/themify-icons-font/themify-icons/themify-icons.css">
+    <style>
+        .checkout-btn, 
+        .clear-cart-btn {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: inherit;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: white;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checkout-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .checkout-btn:hover::before {
+            left: 100%;
+        }
+
+        .checkout-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .clear-cart-btn {
+            background: white;
+            color: black;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 1px solid #000;
+        }
+
+        @media (max-width: 480px) {
+            .checkout-btn, 
+            .clear-cart-btn {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+        }
+
+        #slider {
+            background:URL('./assets/img/SALE.jpg') center/cover no-repeat;
+            height: 400px;
+            margin-top: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #slider::before {
+            content: '⚡';
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.1;
+            animation: floatFlash 3s ease-in-out infinite;
+            left: 10%;
+            top: 20%;
+        }
+
+        
+
+        @keyframes floatFlash {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .flash-sale-header {
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .flash-sale-header h1 {
+            font-size: 48px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 1.5s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.5); }
+            50% { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.8); }
+        }
+
+        .countdown-timer {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .countdown-item {
+            background: rgba(255,255,255,0.2);
+            padding: 15px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .countdown-item .number {
+            font-size: 32px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .countdown-item .label {
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .sort-price {
+            margin: 30px 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-group label { font-weight: 700; }
+
+        .filter-group select, .filter-group input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: #ff4b2b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 12px rgba(255, 75, 43, 0.4); 
+        }
+
+        .grid-template {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            text-align: center;
+            padding: 12px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 5px 20px rgba(255, 75, 43, 0.3);
+            transform: translateY(-5px);
+            border-color: #ff4b2b;
+        }
+
+        .product-card img { 
+            width: 100%; 
+            height: 180px; 
+            object-fit: cover; 
+            border-radius: 6px; 
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(255, 75, 43, 0.4);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .brand-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 12px;
+        }
+
+        .price-new {
+            color: #ff4b2b;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .flash-icon {
+            color: #ff4b2b;
+            margin-right: 5px;
+            animation: flash 1s infinite;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn { 
+            from { opacity: 0; } 
+            to { opacity: 1; } 
+        }
+
+        .modal.active { display: block; }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn { 
+            from { transform: translateY(-50px); opacity: 0; } 
+            to { transform: translateY(0); opacity: 1; } 
+        }
+
+        .modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-close:hover { color: #000; }
+
+        .modal h2 { 
+            margin-bottom: 20px; 
+            color: #333; 
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .form-group input, .form-group select {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #ff4b2b;
+            box-shadow: 0 0 8px rgba(255, 75, 43, 0.2);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .modal-actions button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+        }
+
+        .btn-primary:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 12px rgba(255, 75, 43, 0.4); 
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover { background: #e0e0e0; }
+
+        #footer {
+            width: 100vw;
+            margin-left: calc(50% - 50vw) !important;
+            margin-right: calc(50% - 50vw) !important;
+            background-color: #f2f2f2;
+        }
+
+        #footer .back-ground-footer {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            padding-left: 10vw !important;
+            padding-right: 10vw !important;
+            display: flex;
+            padding-top: 5vw;
+            padding-bottom: 5vw;
+        }
+
+        @media (max-width: 900px) { 
+            .grid-template { grid-template-columns: repeat(2, 1fr); }
+            .flash-sale-header h1 { font-size: 36px; }
+        }
+
+        @media (max-width: 480px) { 
+            .grid-template { grid-template-columns: 1fr; } 
+            .sort-price { flex-direction: column; }
+            .filter-group { flex-direction: column; align-items: stretch; }
+            .flash-sale-header h1 { font-size: 28px; }
+            .countdown-timer { gap: 10px; }
+            .countdown-item { padding: 10px 15px; }
+            .countdown-item .number { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="header">
+        <div class="container-header">
+            <div class="sub-img">
+                <a href="index.html">
+                    <img src="./assets/img/img2.png" alt="Logo" id="logo">
+                </a>
+            </div>
+            <ul class="nav-list">
+                <li><a href="product_nike.html">NIKE</a></li>
+                <li><a href="adidas-products.html">ADIDAS</a></li>
+                <li><a href="product-puma.html">PUMA</a></li>
+                
+                <li><a href="product_flashsale.html">⚡FLASH SALE</a></li>
+            </ul>
+
+            <div class="search-icon">
+                <button id="searchToggle" class="icon-btn" aria-label="Tìm kiếm"><i class="ti-search"></i></button>
+
+                <div id="searchBox" class="search-box" style="display:none;">
+                    <input id="searchInput" type="search" placeholder="Tìm sản phẩm, thương hiệu..." autocomplete="off">
+                    <div id="searchResults" class="search-results" role="listbox"></div>
+                </div>
+
+                <button id="cartBtn" class="icon-btn" aria-label="Giỏ hàng">
+                    <i class="ti-shopping-cart"></i>
+                    <span id="cartBadge" class="cart-badge" style="display:none;">0</span>
+                </button>
+
+                <div id="userIcon" style="margin-left:8px;cursor:pointer;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slider -->
+    <div id="slider">
+        
+    </div>
+
+    <!-- Main Content -->
+    <div id="content">
+        <div class="container-content">
+            <!-- Filter & Sort Section -->
+            <div class="sort-price">
+                <h2 style="margin: 0;"><i class="fas fa-fire flash-icon"></i>Sản Phẩm Flash Sale</h2>
+                <div class="filter-group">
+                    <label for="sortFlash">Sắp xếp:</label>
+                    <select id="sortFlash">
+                        <option value="default">Mặc định</option>
+                        <option value="price-asc">Giá: thấp → cao</option>
+                        <option value="price-desc">Giá: cao → thấp</option>
+                        <option value="discount-desc">Giảm giá nhiều nhất</option>
+                    </select>
+
+                    <label for="filterBrand" style="margin-left: 12px;">Thương hiệu:</label>
+                    <select id="filterBrand">
+                        <option value="all">Tất cả</option>
+                        <option value="NIKE">Nike</option>
+                        <option value="ADIDAS">Adidas</option>
+                        <option value="PUMA">Puma</option>
+                    </select>
+
+                    <label style="margin-left: 12px;">Khoảng giá:</label>
+                    <input id="flashMinPrice" type="number" placeholder="Từ" min="0" style="width:100px;">
+                    <input id="flashMaxPrice" type="number" placeholder="Đến" min="0" style="width:100px;">
+                    <button id="applyFlashFilter" class="filter-btn">Áp dụng</button>
+                    <button id="clearFlashFilter" class="filter-btn" style="background: #999;">Xóa</button>
+                </div>
+                <div style="margin-top:8px;">
+                    <span id="flashResultCount" style="color:#666;font-size:14px;">Đang tải...</span>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="flashProductsGrid" class="grid-template space-margin">
+                <!-- Products will be loaded from API -->
+            </div>
+
+            <!-- Pagination container -->
+            <div id="flashPagination" style="display:flex;justify-content:center;margin:40px 0;"></div>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <img id="modalProductImg" src="" alt="" style="width: 100%; border-radius: 8px;">
+                </div>
+                <div>
+                    <h2 id="modalProductName">Tên sản phẩm</h2>
+                    <div style="margin-bottom: 15px;">
+                        <span class="price-old" id="modalProductPriceOld"></span>
+                        <span class="price-new" id="modalProductPriceNew"></span>
+                    </div>
+                    <p id="modalProductDesc" style="color: #666; margin-bottom: 15px;"></p>
+
+                    <form class="modal-form" id="productActionForm">
+                        <div class="form-group">
+                            <label for="modalSize">Kích cỡ (Size):</label>
+                            <select id="modalSize" required>
+                                <option value="">-- Chọn kích cỡ --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modalColor">Màu sắc:</label>
+                            <select id="modalColor" required>
+                                <option value="">-- Chọn màu --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="modalQty">Số lượng:</label>
+                            <input id="modalQty" type="number" min="1" max="99" value="1" required>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="button" class="btn-primary" id="addToCartBtn">
+                                <i class="ti-shopping-cart"></i> Thêm giỏ hàng
+                            </button>
+                            <button type="button" class="btn-primary" id="buyNowBtn">
+                                <i class="fa-solid fa-bolt"></i> Đặt hàng ngay
+                            </button>
+                            <button type="button" class="btn-secondary" id="closeModalBtn">Đóng</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+        <div class="back-ground-footer">
+            <div class="footer-1">
+                <img src="./assets/img/img2_new.png" alt="">
+                <p class="part-footer-1" style="margin-top: 1vw; margin-bottom: 2vw">
+                    CloudySport - Nhà sưu tầm và phân phối chính hãng các thương hiệu thời trang quốc tế hàng đầu Việt Nam
+                </p>
+                <h4 class="h4-footer-1" style="margin-bottom: 1.5vw">THÔNG TIN CỬA HÀNG</h4>
+                <ul class="infor">
+                    <div class="font">
+                        <li><i class="fa-solid fa-location-dot"></i> 321 Nguyễn Xiển - Đại Kim - Hoàng Mai - Hà Nội</li>
+                    </div>
+                    <div class="font">
+                        <li><i class="fa-solid fa-phone"></i>Hotline : 0987654321</li>
+                    </div>
+                    <div class="font">
+                        <li><i class="fa-solid fa-envelope"></i>Service@CloudySport.com</li>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="footer-2">
+                <div class="title">
+                    <h4 class="sub-title">Về chúng tôi</h4>
+                </div>
+                <div class="sub-footer">
+                    <div class="menu-sub-footer">Giới Thiệu</div>
+                    <div class="menu-sub-footer">Tuyển dụng</div>
+                    <div class="menu-sub-footer">Dịch Vụ Sửa Giày</div>
+                    <div class="menu-sub-footer">Tin tức - Sự kiện</div>
+                </div>
+                <div class="title">
+                    <h4 class="sub-title">Kết nối với chúng tôi</h4>
+                </div>
+                <div class="sub-icon">
+                    <a class="icon" href="https://www.facebook.com/" title="Kết nối đến Facebook!" target="_blank">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a class="icon" href="https://www.instagram.com/" title="Kết nối đến Instagram!" target="_blank">
+                        <i class="fa-brands fa-square-instagram"></i>
+                    </a>
+                    <a class="icon" href="https://www.linkedin.com/" title="Kết nối đến LinkedIn!" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-3">
+                <div class="title">
+                    <h4 class="sub-title">Hỗ trợ Khách hàng</h4>
+                </div>
+                <div class="sub-footer">
+                    <div class="menu-sub-footer">Hướng dẫn mua hàng</div>
+                    <div class="menu-sub-footer">Chính sách đổi trả và bảo hành</div>
+                    <div class="menu-sub-footer">Chính sách thanh toán</div>
+                    <div class="menu-sub-footer">Chính sách bảo vệ thông tin cá nhân</div>
+                    <div class="menu-sub-footer">Vận chuyển và giao hàng</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/user-profile.js"></script>
+    <script src="./assets/js/search-cart.js"></script>
+    
+    <script>
+    (function() {
+        'use strict';
+        
+        const API_URL = 'http://localhost:3000';
+        const PRODUCTS_PER_PAGE = 12;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('[FlashSale] Script started at:', new Date().toLocaleTimeString());
+            
+            const flashGrid = document.getElementById('flashProductsGrid');
+            const sortSelect = document.getElementById('sortFlash');
+            const brandFilter = document.getElementById('filterBrand');
+            const minPriceInput = document.getElementById('flashMinPrice');
+            const maxPriceInput = document.getElementById('flashMaxPrice');
+            const applyFilterBtn = document.getElementById('applyFlashFilter');
+            const clearFilterBtn = document.getElementById('clearFlashFilter');
+            const resultCount = document.getElementById('flashResultCount');
+            const modal = document.getElementById('productModal');
+            const modalClose = document.querySelector('.modal-close');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+
+            if (!flashGrid) {
+                console.error('[FlashSale] ERROR: flashProductsGrid not found!');
+                return;
+            }
+
+            let allProducts = [];
+            let filteredProducts = [];
+            let currentPage = 1;
+            
+            // Countdown Timer
+            function startCountdown() {
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+                
+                if (!hoursEl || !minutesEl || !secondsEl) return;
+                
+                function updateCountdown() {
+                    const now = new Date();
+                    const tomorrow = new Date(now);
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    tomorrow.setHours(0, 0, 0, 0);
+                    
+                    const diff = tomorrow - now;
+                    const hours = Math.floor(diff / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                    
+                    hoursEl.textContent = hours.toString().padStart(2, '0');
+                    minutesEl.textContent = minutes.toString().padStart(2, '0');
+                    secondsEl.textContent = seconds.toString().padStart(2, '0');
+                }
+                
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            }
+            
+            startCountdown();
+            
+            async function loadProducts() {
+                try {
+                    console.log('[FlashSale] Fetching products...');
+                    
+                    if (resultCount) resultCount.textContent = 'Đang tải sản phẩm...';
+                    if (flashGrid) flashGrid.innerHTML = '<p style="text-align:center;padding:40px;">⏳ Đang tải...</p>';
+                    
+                    const response = await fetch(`${API_URL}/products`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const products = await response.json();
+                    console.log('[FlashSale] Loaded', products.length, 'products');
+                    
+                    const brandProducts = products.filter(p => {
+                        const hasBrand = p.brand && ['NIKE', 'ADIDAS', 'PUMA'].includes(p.brand.toUpperCase());
+                        const hasDiscount = (p.discount || 0) > 0;
+                        return hasBrand && hasDiscount;
+                    });
+                    
+                    allProducts = brandProducts
+                        .sort((a, b) => (b.discount || 0) - (a.discount || 0))
+                        .slice(0, 12);
+                    
+                    console.log('[FlashSale] Selected', allProducts.length, 'flash sale products');
+                    
+                    if (allProducts.length === 0) {
+                        if (resultCount) resultCount.textContent = 'Không có sản phẩm Flash Sale';
+                        if (flashGrid) flashGrid.innerHTML = '<p style="text-align:center;padding:40px;color:#999;">Không có sản phẩm Flash Sale</p>';
+                        return;
+                    }
+                    
+                    filteredProducts = [...allProducts];
+                    renderProducts(filteredProducts, 1);
+                } catch (error) {
+                    console.error('[FlashSale] Error:', error);
+                    
+                    if (resultCount) resultCount.textContent = 'Lỗi tải sản phẩm';
+                    if (flashGrid) {
+                        flashGrid.innerHTML = `
+                            <div style="text-align:center;padding:40px;color:#ff4b2b;">
+                                <h3>❌ Lỗi kết nối</h3>
+                                <p>${error.message}</p>
+                                <p style="margin-top:15px;">Vui lòng chạy: <code>json-server --watch db.json --port 3000</code></p>
+                            </div>
+                        `;
+                    }
+                }
+            }
+
+            const formatPrice = v => new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(v || 0);
+
+            function renderProducts(products, page = 1) {
+                if (!flashGrid) return;
+                
+                currentPage = page;
+                const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+                const startIndex = (page - 1) * PRODUCTS_PER_PAGE;
+                const endIndex = startIndex + PRODUCTS_PER_PAGE;
+                const productsToShow = products.slice(startIndex, endIndex);
+                
+                flashGrid.innerHTML = '';
+                
+                if (!products || products.length === 0) {
+                    if (resultCount) resultCount.textContent = 'Không tìm thấy sản phẩm';
+                    flashGrid.innerHTML = '<p style="text-align:center;padding:40px;color:#999;">Không có sản phẩm</p>';
+                    renderPagination(0, page);
+                    return;
+                }
+
+                if (resultCount) {
+                    resultCount.textContent = `${products.length} sản phẩm Flash Sale`;
+                }
+
+                productsToShow.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.setAttribute('data-id', product.id);
+                    card.setAttribute('data-name', product.name);
+                    card.setAttribute('data-price', product.price);
+                    card.setAttribute('data-finalprice', product.finalPrice);
+                    card.setAttribute('data-image', product.image);
+                    card.setAttribute('data-desc', product.description || '');
+                    card.setAttribute('data-sizes', (product.size || []).join(','));
+                    card.setAttribute('data-colors', (product.color || []).join(','));
+                    card.setAttribute('data-brand', product.brand || '');
+
+                    card.innerHTML = `
+                        <span class="discount-badge">-${product.discount || 0}%</span>
+                        <span class="brand-badge">${product.brand || ''}</span>
+                        <img src="${product.image}" alt="${product.name}" class="product-img">
+                        <div class="product-name">${product.name}</div>
+                        <div>
+                            <span class="price-old">${formatPrice(product.price)}</span>
+                            <span class="price-new">${formatPrice(product.finalPrice)}</span>
+                        </div>
+                    `;
+
+                    flashGrid.appendChild(card);
+                });
+
+                renderPagination(totalPages, page);
+            }
+
+            function renderPagination(totalPages, currentPage) {
+                let paginationContainer = document.getElementById('flashPagination');
+                
+                if (!paginationContainer) {
+                    paginationContainer = document.createElement('div');
+                    paginationContainer.id = 'flashPagination';
+                    paginationContainer.style.cssText = 'display:flex;justify-content:center;margin:40px 0;';
+                    if (flashGrid) flashGrid.insertAdjacentElement('afterend', paginationContainer);
+                }
+
+                if (totalPages <= 1) {
+                    paginationContainer.innerHTML = '';
+                    return;
+                }
+
+                let html = '<div style="display:flex;gap:8px;">';
+
+                if (currentPage > 1) {
+                    html += `<button class="page-btn" data-page="${currentPage - 1}" style="min-width:36px;height:36px;border:1px solid #ddd;background:#fff;cursor:pointer;border-radius:4px;">‹</button>`;
+                }
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const isActive = i === currentPage;
+                    const style = isActive ? 'background:#ff4b2b;color:#fff;' : '';
+                    html += `<button class="page-btn" data-page="${i}" style="min-width:36px;height:36px;border:1px solid #ddd;cursor:pointer;border-radius:4px;${style}">${i}</button>`;
+                }
+
+                if (currentPage < totalPages) {
+                    html += `<button class="page-btn" data-page="${currentPage + 1}" style="min-width:36px;height:36px;border:1px solid #ddd;background:#fff;cursor:pointer;border-radius:4px;">›</button>`;
+                }
+
+                html += '</div>';
+                paginationContainer.innerHTML = html;
+
+                paginationContainer.querySelectorAll('.page-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const page = parseInt(btn.getAttribute('data-page'));
+                        renderProducts(filteredProducts, page);
+                        window.scrollTo({ top: 300, behavior: 'smooth' });
+                    });
+                });
+            }
+
+            function applyFiltersAndSort() {
+                let filtered = [...allProducts];
+
+                const brandValue = brandFilter ? brandFilter.value : 'all';
+                if (brandValue !== 'all') {
+                    filtered = filtered.filter(p => p.brand && p.brand.toUpperCase() === brandValue);
+                }
+
+                const minPrice = minPriceInput ? (parseInt(minPriceInput.value) || 0) : 0;
+                const maxPrice = maxPriceInput ? (parseInt(maxPriceInput.value) || Infinity) : Infinity;
+                
+                filtered = filtered.filter(p => {
+                    const price = p.finalPrice || p.price || 0;
+                    return price >= minPrice && price <= maxPrice;
+                });
+
+                const sortValue = sortSelect ? sortSelect.value : 'default';
+                
+                if (sortValue === 'price-asc') {
+                    filtered.sort((a, b) => (a.finalPrice || a.price) - (b.finalPrice || b.price));
+                } else if (sortValue === 'price-desc') {
+                    filtered.sort((a, b) => (b.finalPrice || b.price) - (a.finalPrice || a.price));
+                } else if (sortValue === 'discount-desc') {
+                    filtered.sort((a, b) => (b.discount || 0) - (a.discount || 0));
+                }
+
+                filteredProducts = filtered;
+                renderProducts(filteredProducts, 1);
+            }
+
+            if (applyFilterBtn) applyFilterBtn.addEventListener('click', applyFiltersAndSort);
+            if (sortSelect) sortSelect.addEventListener('change', applyFiltersAndSort);
+            if (brandFilter) brandFilter.addEventListener('change', applyFiltersAndSort);
+            
+            if (clearFilterBtn) {
+                clearFilterBtn.addEventListener('click', () => {
+                    if (minPriceInput) minPriceInput.value = '';
+                    if (maxPriceInput) maxPriceInput.value = '';
+                    if (sortSelect) sortSelect.value = 'default';
+                    if (brandFilter) brandFilter.value = 'all';
+                    filteredProducts = [...allProducts];
+                    renderProducts(filteredProducts, 1);
+                });
+            }
+
+            if (flashGrid) {
+                flashGrid.addEventListener('click', (e) => {
+                    const card = e.target.closest('.product-card');
+                    if (!card) return;
+
+                    const product = {
+                        id: card.getAttribute('data-id'),
+                        name: card.getAttribute('data-name'),
+                        price: parseInt(card.getAttribute('data-price')),
+                        finalPrice: parseInt(card.getAttribute('data-finalprice')),
+                        image: card.getAttribute('data-image'),
+                        description: card.getAttribute('data-desc'),
+                        size: (card.getAttribute('data-sizes') || '').split(',').filter(s => s.trim()),
+                        color: (card.getAttribute('data-colors') || '').split(',').filter(c => c.trim()),
+                        brand: card.getAttribute('data-brand')
+                    };
+
+                    document.getElementById('modalProductImg').src = product.image;
+                    document.getElementById('modalProductName').textContent = product.name;
+                    document.getElementById('modalProductPriceOld').textContent = formatPrice(product.price);
+                    document.getElementById('modalProductPriceNew').textContent = formatPrice(product.finalPrice);
+                    document.getElementById('modalProductDesc').textContent = product.description;
+
+                    const sizeSelect = document.getElementById('modalSize');
+                    sizeSelect.innerHTML = '<option value="">-- Chọn kích cỡ --</option>';
+                    product.size.forEach(s => {
+                        const opt = document.createElement('option');
+                        opt.value = s;
+                        opt.textContent = s;
+                        sizeSelect.appendChild(opt);
+                    });
+
+                    const colorSelect = document.getElementById('modalColor');
+                    colorSelect.innerHTML = '<option value="">-- Chọn màu --</option>';
+                    product.color.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = c;
+                        opt.textContent = c;
+                        colorSelect.appendChild(opt);
+                    });
+
+                    document.getElementById('modalQty').value = 1;
+                    window.currentProduct = product;
+
+                    if (modal) {
+                        modal.style.display = 'block';
+                        modal.classList.add('active');
+                    }
+                });
+            }
+
+            function closeModal() {
+                if (modal) {
+                    modal.style.display = 'none';
+                    modal.classList.remove('active');
+                }
+            }
+
+            if (modalClose) modalClose.addEventListener('click', closeModal);
+            if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+            }
+
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', async () => {
+                    if (!window.currentProduct) return;
+
+                    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+                    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+                    if (!currentUser.id || !isLoggedIn) {
+                        if (confirm('Bạn cần đăng nhập để thêm vào giỏ. Đi tới trang đăng nhập?')) {
+                            window.location.href = './login.html';
+                        }
+                        return;
+                    }
+
+                    const sizeVal = document.getElementById('modalSize').value;
+                    const colorVal = document.getElementById('modalColor').value;
+                    const qtyVal = parseInt(document.getElementById('modalQty').value, 10) || 1;
+
+                    if (!sizeVal || !colorVal) {
+                        alert('Vui lòng chọn kích cỡ và màu sắc');
+                        return;
+                    }
+
+                    const payload = {
+                        userId: currentUser.id,
+                        productId: window.currentProduct.id,
+                        quantity: qtyVal,
+                        selectedSize: sizeVal,
+                        selectedColor: colorVal
+                    };
+
+                    try {
+                        const res = await fetch(`${API_URL}/cart`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (res.ok) {
+                            alert('✓ Đã thêm vào giỏ hàng!');
+                            closeModal();
+                            if (typeof updateCartBadge === 'function') updateCartBadge();
+                        } else {
+                            alert('Lỗi khi thêm vào giỏ hàng');
+                        }
+                    } catch (err) {
+                        console.error('[FlashSale] Error:', err);
+                        alert('Lỗi mạng');
+                    }
+                });
+            }
+
+            const buyNowBtn = document.getElementById('buyNowBtn');
+            if (buyNowBtn) {
+                buyNowBtn.addEventListener('click', async () => {
+                    if (!window.currentProduct) return;
+
+                    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+                    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+                    if (!currentUser.id || !isLoggedIn) {
+                        alert('Bạn cần đăng nhập để đặt hàng');
+                        window.location.href = './login.html';
+                        return;
+                    }
+
+                    const sizeVal = document.getElementById('modalSize').value;
+                    const colorVal = document.getElementById('modalColor').value;
+                    const qtyVal = parseInt(document.getElementById('modalQty').value, 10) || 1;
+
+                    if (!sizeVal || !colorVal) {
+                        alert('Vui lòng chọn kích cỡ và màu sắc');
+                        return;
+                    }
+
+                    try {
+                        const cartItem = {
+                            userId: currentUser.id,
+                            productId: window.currentProduct.id,
+                            name: window.currentProduct.name,
+                            price: window.currentProduct.finalPrice || window.currentProduct.price,
+                            image: window.currentProduct.image,
+                            size: sizeVal,
+                            color: colorVal,
+                            quantity: qtyVal
+                        };
+
+                        const response = await fetch(`${API_URL}/cart`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(cartItem)
+                        });
+
+                        if (response.ok) {
+                            closeModal();
+                            window.location.href = 'checkout.html';
+                        } else {
+                            alert('Lỗi khi thêm vào giỏ hàng');
+                        }
+                    } catch (err) {
+                        console.error('[FlashSale] Error:', err);
+                        alert('Lỗi: ' + err.message);
+                    }
+                });
+            }
+
+            await loadProducts();
+        });
+    })();
+    </script>
+
+</body>
+</html>

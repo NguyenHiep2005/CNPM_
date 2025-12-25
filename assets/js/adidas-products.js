@@ -6,15 +6,15 @@
     const PRODUCTS_PER_PAGE = 8;
 
     document.addEventListener('DOMContentLoaded', async () => {
-        console.log('[Nike] DOMContentLoaded - Script started');
+        console.log('[Adidas] DOMContentLoaded - Script started');
         
-        const nikeGrid = document.getElementById('nikeProductsGrid');
-        const sortSelect = document.getElementById('sortNike');
-        const minPriceInput = document.getElementById('nikeMinPrice');
-        const maxPriceInput = document.getElementById('nikeMaxPrice');
-        const applyFilterBtn = document.getElementById('applyNikeFilter');
-        const clearFilterBtn = document.getElementById('clearNikeFilter');
-        const resultCount = document.getElementById('nikeResultCount');
+        const adidasGrid = document.getElementById('adidasProductsGrid');
+        const sortSelect = document.getElementById('sortAdidas');
+        const minPriceInput = document.getElementById('adidasMinPrice');
+        const maxPriceInput = document.getElementById('adidasMaxPrice');
+        const applyFilterBtn = document.getElementById('applyAdidasFilter');
+        const clearFilterBtn = document.getElementById('clearAdidasFilter');
+        const resultCount = document.getElementById('adidasResultCount');
         const modal = document.getElementById('productModal');
         const modalClose = document.querySelector('.modal-close');
         const closeModalBtn = document.getElementById('closeModalBtn');
@@ -25,7 +25,7 @@
         
         async function loadProducts() {
             try {
-                console.log('[Nike] Fetching products from API...');
+                console.log('[Adidas] Fetching products from API...');
                 const response = await fetch(`${API_URL}/products`);
                 
                 if (!response.ok) {
@@ -34,22 +34,22 @@
                 
                 const products = await response.json();
                 allProducts = products.filter(p => 
-                    p.brand && p.brand.toUpperCase() === 'NIKE'
+                    p.brand && p.brand.toUpperCase() === 'ADIDAS'
                 );
                 
-                console.log('[Nike] Loaded', allProducts.length, 'Nike products');
+                console.log('[Adidas] Loaded', allProducts.length, 'Adidas products');
                 
                 if (allProducts.length === 0) {
-                    if (resultCount) resultCount.textContent = 'Không có sản phẩm Nike';
+                    if (resultCount) resultCount.textContent = 'Không có sản phẩm Adidas';
                     return;
                 }
                 
                 filteredProducts = [...allProducts];
                 renderProducts(filteredProducts, 1);
             } catch (error) {
-                console.error('[Nike] Error loading products:', error);
+                console.error('[Adidas] Error loading products:', error);
                 if (resultCount) resultCount.textContent = 'Lỗi tải sản phẩm';
-                if (nikeGrid) nikeGrid.innerHTML = '<p style="text-align:center;padding:40px;color:#999;">Lỗi kết nối API. Vui lòng kiểm tra json-server đang chạy.</p>';
+                if (adidasGrid) adidasGrid.innerHTML = '<p style="text-align:center;padding:40px;color:#999;">Lỗi kết nối API. Vui lòng kiểm tra json-server đang chạy.</p>';
             }
         }
 
@@ -59,10 +59,10 @@
         }).format(v || 0);
 
         function renderProducts(products, page = 1) {
-            console.log('[Nike] renderProducts called with', products.length, 'products, page:', page);
+            console.log('[Adidas] renderProducts called with', products.length, 'products, page:', page);
             
-            if (!nikeGrid) {
-                console.error('[Nike] nikeGrid element not found!');
+            if (!adidasGrid) {
+                console.error('[Adidas] adidasGrid element not found!');
                 return;
             }
             
@@ -72,17 +72,17 @@
             const endIndex = startIndex + PRODUCTS_PER_PAGE;
             const productsToShow = products.slice(startIndex, endIndex);
             
-            nikeGrid.innerHTML = '';
+            adidasGrid.innerHTML = '';
             
             if (!products || products.length === 0) {
                 if (resultCount) resultCount.textContent = 'Không tìm thấy sản phẩm';
-                nikeGrid.innerHTML = '<p style="text-align:center;padding:40px;color:#999;">Không có sản phẩm nào.</p>';
+                adidasGrid.innerHTML = '<p style="text-align:center;padding:40px;color:#999;">Không có sản phẩm nào.</p>';
                 renderPagination(0, page);
                 return;
             }
 
             if (resultCount) {
-                resultCount.textContent = `${products.length} sản phẩm Nike`;
+                resultCount.textContent = `${products.length} sản phẩm Adidas`;
             }
 
             productsToShow.forEach(product => {
@@ -107,21 +107,20 @@
                     </div>
                 `;
 
-                nikeGrid.appendChild(card);
+                adidasGrid.appendChild(card);
             });
 
             renderPagination(totalPages, page);
         }
 
         function renderPagination(totalPages, currentPage) {
-            let paginationContainer = document.getElementById('nikePagination');
+            let paginationContainer = document.getElementById('adidasPagination');
             
             if (!paginationContainer) {
                 paginationContainer = document.createElement('div');
-                paginationContainer.id = 'nikePagination';
+                paginationContainer.id = 'adidasPagination';
                 paginationContainer.style.cssText = 'display:flex;justify-content:center;margin:40px 0;';
-                //  Thêm vào sau nikeGrid, TRƯỚC footer
-                nikeGrid.insertAdjacentElement('afterend', paginationContainer);
+                adidasGrid.insertAdjacentElement('afterend', paginationContainer);
             }
 
             if (totalPages <= 1) {
@@ -191,7 +190,7 @@
         }
 
         function applyFiltersAndSort() {
-            console.log('[Nike] applyFiltersAndSort called');
+            console.log('[Adidas] applyFiltersAndSort called');
             let filtered = [...allProducts];
 
             const minPrice = parseInt(minPriceInput.value) || 0;
@@ -234,8 +233,8 @@
             });
         }
 
-        if (nikeGrid) {
-            nikeGrid.addEventListener('click', (e) => {
+        if (adidasGrid) {
+            adidasGrid.addEventListener('click', (e) => {
                 const card = e.target.closest('.product-card');
                 if (!card) return;
 
@@ -343,7 +342,7 @@
                         alert('Lỗi khi thêm vào giỏ hàng');
                     }
                 } catch (err) {
-                    console.error('[Nike] Add to cart error:', err);
+                    console.error('[Adidas] Add to cart error:', err);
                     alert('Lỗi mạng');
                 }
             });
@@ -397,7 +396,7 @@
                         alert('Lỗi khi thêm vào giỏ hàng');
                     }
                 } catch (err) {
-                    console.error('[Nike] Buy now error:', err);
+                    console.error('[Adidas] Buy now error:', err);
                     alert('Lỗi: ' + err.message);
                 }
             });
